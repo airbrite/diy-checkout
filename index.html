@@ -6,6 +6,76 @@
 	<link rel="stylesheet" href="styles.css" />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<script src="https://www.trycelery.com/js/c.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+	/*
+	 * SDK for an easy to use cart on your own page
+	 */
+	  $(document).ready(function() {
+	  	// Some CSS to make the page more usable
+	  	$("#preorder-button").click(function() {
+	  		$(".preorder-button").hide();
+	  		$(".preorder-now").fadeIn();
+	  	})
+
+	  	// Initialize the cart with your email and some other variables
+	    cart.init({
+	      apiHost: "https://api.trycelery.com",
+	      sellerEmail: "",
+	      currency: "usd",
+	      shipping: 9.99
+	    });
+
+	    // For this example we are adding one product to the cart.
+	    cart.items = [{
+	    	quantity: 1,
+	    	slug: "hoverboard"
+	    }]
+
+	    /* 
+	     * See <input> elements and checkout button for syntax
+	     * The key attribute to note is data-cart-buyer, data-cart-shipping-address, 
+	     * data-cart-payment, data-cart etc. which specify inputs that the buyer will enter.
+	     * These inputs are automatically checked for by the cart.js code.
+	     *
+	     * Finally, <button data-cart-action="checkout">Checkout</button> is listened
+	     * and will send the checkout information gathered above.
+	     */
+
+	    // Events from the cart can be listened for and handled
+
+	    // After the buyer clicks on the checkout button
+	    $(window).on("orderBegan", function(event) {
+	    	$('#btn-checkout').attr('disabled', 'disabled');
+	    	$('#btn-checkout').text('Placing Order...');
+	    });
+
+	    // After an invalid input is found
+	    $(window).on("orderInputInvalid", function(event, el) {
+	    	// You can add your own validation, this tells you what element was invalid
+	    	var $el = $(el);
+	    	$el.addClass('error-box');
+	    });
+
+	    // After the order has failed
+	    $(window).on("orderFailed", function(event) {
+	    	var origText = "Place Order";
+	    	$('#btn-checkout').text('Error Placing Order');
+
+	    	setTimeout(function() {
+	    		$('#btn-checkout').removeAttr('disabled');
+	    		$('#btn-checkout').text(origText);
+	    	}, 1000);
+	    });
+
+	    // And after the order is completed successfully 
+			$(window).on("orderComplete", function(event, order) {
+				$("#order-form").hide();
+				$(".label-order-id").text(order.id);
+				$("#order-confirmation").show();
+			});
+	  });
+	</script>
 </head>
 <body>
 	<section class="hero hero-home">
@@ -176,62 +246,3 @@
 	</section>
 </body>
 </html>
-
-<script>
-/*
- * SDK for an easy to use cart on your own page
- */
-  $(document).ready(function() {
-  	// Some CSS to make the page more usable
-  	$("#preorder-button").click(function() {
-  		$(".preorder-button").hide();
-  		$(".preorder-now").fadeIn();
-  	})
-
-  	// Initialize the cart with your email and some other variables
-    cart.init({
-      apiHost: "https://api.trycelery.com",
-      sellerEmail: "",
-      currency: "usd",
-      shipping: 9.99
-    });
-
-    // For this example we are adding one product to the cart
-    cart.items = [{
-    	quantity: 1,
-    	slug: "hoverboard"
-    }]
-    // Events from the cart can be listened for and handled
-
-    // After the buyer clicks on the checkout button
-    $(window).on("orderBegan", function(event) {
-    	$('#btn-checkout').attr('disabled', 'disabled');
-    	$('#btn-checkout').text('Placing Order...');
-    });
-
-    // After an invalid input is found
-    $(window).on("orderInputInvalid", function(event, el) {
-    	// You can add your own validation, this tells you what element was invalid
-    	var $el = $(el);
-    	$el.addClass('error-box');
-    });
-
-    // After the order has failed
-    $(window).on("orderFailed", function(event) {
-    	var origText = "Place Order";
-    	$('#btn-checkout').text('Error Placing Order');
-
-    	setTimeout(function() {
-    		$('#btn-checkout').removeAttr('disabled');
-    		$('#btn-checkout').text(origText);
-    	}, 1000);
-    });
-
-    // And after the order is completed successfully 
-		$(window).on("orderComplete", function(event, order) {
-			$("#order-form").hide();
-			$(".label-order-id").text(order.id);
-			$("#order-confirmation").show();
-		});
-  });
-</script>
