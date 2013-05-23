@@ -33,7 +33,7 @@ text-shadow: none;
 }
 
 .hero-home {
-	background-image: url("/img/hoverboard.jpg");
+	background-image: url("img/hoverboard.jpg");
 	background-position: center 0;
 }
 
