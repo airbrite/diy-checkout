@@ -1,0 +1,238 @@
+<!doctype html>
+<head>
+	<title>Hoverboard - The Future Has Arrived</title>
+
+	<link rel="stylesheet" href="/bootstrap.min.css" />
+	<link rel="stylesheet" href="/styles.css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script src="//localhost:3333/js/cart.js" type="text/javascript"></script>
+</head>
+<body>
+	<section class="hero hero-home">
+		<div class="overlay"></div>
+		<article>
+		    <div class="hero-home-content">
+		      <h1>Finally, you can pre-order a hoverboard</h1>
+		      <h5>Hoverboards are the <strong>easiest way to hover</strong><br>and <strong>fly around your city</strong>.</h5>
+		    </div>
+		  </article>
+	</section>
+	<section>
+		<article>
+			<div class="row ac">
+				<h3>Tired of walking?</h3>
+				<p class="lead">We made it easy to get around faster than ever</p>
+			</div>
+			<div class="spacer"></div>
+			<div class="spacer"></div>
+			<div class="row">
+	      <div class="span6">
+	        <h5>Like a skateboard</h5>
+	        <p>Only instead of wheels, you float on nothing</p>
+	    
+	        <h5>Be the life of the party</h5>
+	        <p>Doing tricks has never been so easy and impressive.  Woo the ladies with your awesome stunts.</p>
+	    
+	        <h5>Antigravity is the future</h5>
+	        <p>Be a part of the future by owning your own antigravity device</p>
+	      </div>
+
+	      <div class="span6">
+	        <img id="home-img-revenue" class="animated fadeIn" src="/img/hoverboard-2.jpg" width="400px" alt="Celery orders dashboard screenshot">
+	      </div>
+	    </div>
+		</article>
+	</section>
+	<section class="preorder-button">
+		<article>
+			<div class="row ac">
+				<button id="preorder-button" class="btn btn-success btn-large">Preorder Now</button>
+			</div>
+		</article>
+	</section>
+	<section class="preorder-now" style="display:none;">
+		<article>
+			<form id="order-form" class="box box-rounded" action="javascript:return false;">
+				<div class="row ac">
+					<h3>Preorder Now!</h3>
+				</div>
+			  <div class="box-content">
+				  <div class="row">
+				  	<div class="span6">
+			    		<h5>Shipping Information</h5>
+			    		<div class="row">
+			      		<div class="span6">
+			        		<input class="input-block-level" type="email" name="email" placeholder="Your E-mail Address" data-cart-buyer="email"/>
+			        		<input class="input-block-level" name="name" type="text" placeholder="Full Name" data-cart-buyer="name"/>
+			        	</div>
+			      	</div>
+
+			      	<div class="row">
+			      	  <div class="span6">
+			      	    <input class="input-block-level" name="street" type="text" placeholder="Street Address" data-cart-shipping-address="street"/>
+			      	  </div>
+			      	</div>
+
+			      	<div class="row">
+			      	  <div class="span3">
+			      	    <input class="input-block-level" name="city" type="text" placeholder="City" data-cart-shipping-address="city"/>
+			      	  </div>
+			      	  <div class="span3">
+			      	    <input class="input-block-level" name="state" type="text" placeholder="State" data-cart-shipping-address="state"/>
+			      	  </div>
+			      	</div>
+			      	<div class="row">
+			      	  <div class="span3">
+			      	    <input class="input-block-level" name="zip" type="text" placeholder="ZIP" data-cart-shipping-address="zip"/>
+			      	  </div>
+			      	  <div class="span3">
+			      	    <select class="input-block-level" name="country" data-cart-shipping-address="country">
+			      	        <option value="US" selected>United States</option>
+			      	    </select>
+			      	  </div>
+			      	</div>
+
+			      	<div class="small mts"><i>No billing address required.</i></div>
+			    	</div>
+			  		<div class="span6">
+					    <h5>Payment Information</h5>
+					    <div class="row">
+					      <div class="span6">
+					        <span class="credit-card-icon shop-cc-icon"></span>
+					        <input class="input-block-level nm" type="tel" placeholder="Card Number" data-cart-payment="card_number"/>
+					      </div>
+					    </div>
+
+				    	<div class="row">
+					      <div class="span2">
+					        <select class="input-block-level nm" name="card_exp_month" data-cart-payment="card_exp_month">
+					          <option value="01">01 - January</option>
+					          <option value="02">02 - February</option>
+					          <option value="03">03 - March</option>
+					          <option value="04">04 - April</option>
+					          <option value="05">05 - May</option>
+					          <option value="06">06 - June</option>
+					          <option value="07">07 - July</option>
+					          <option value="08">08 - August</option>
+					          <option value="09">09 - September</option>
+					          <option value="10">10 - October</option>
+					          <option value="11">11 - November</option>
+					          <option value="12">12 - December</option>
+					        </select>
+					      </div>
+					      <div class="span2">
+					        <select class="input-block-level nm" name="card_exp_year" data-cart-payment="card_exp_year">
+					          <option value="2013">2013</option>
+					          <option value="2014">2014</option>
+					          <option value="2015">2015</option>
+					          <option value="2016">2016</option>
+					          <option value="2017">2017</option>
+					          <option value="2018">2018</option>
+					          <option value="2019">2019</option>
+					          <option value="2020">2020</option>
+					          <option value="2021">2021</option>
+					          <option value="2022">2022</option>
+					          <option value="2023">2023</option>
+					          <option value="2024">2024</option>
+					          <option value="2025">2025</option>
+					          <option value="2026">2026</option>
+					          <option value="2027">2027</option>
+					          <option value="2028">2028</option>
+					          <option value="2029">2029</option>
+					          <option value="2030">2030</option>
+					        </select>
+					      </div>
+					      <div class="span2">
+					        <input class="input-block-level nm" type="tel" placeholder="CVC" maxlength="4" data-cart-payment="card_cvc"/>
+					      </div>
+					    </div>
+
+					    <div id="order-checkout" class="box box-rounded">
+					      <div class="box-content">
+					        <button id="btn-checkout" class="btn btn-success btn-large btn-block" data-cart-action="checkout">Checkout</button>
+
+					        <div class="spacer-small"></div>
+
+					        <div class="ac small">
+					          <i class="inline icon-lock" ></i> SSL Secured | <a class="unstyled" href="{{config.prod_url}}">Powered by Celery</a>
+					        </div>
+					      </div>
+					    </div>
+				    </div>
+			  	</div>
+				</div>
+			</form>
+
+
+			<div id="order-confirmation" class="box box-rounded" style="display:none;">
+			  <div class="box-content ac">
+			    <h6>Thanks for Your Order!</h6>
+			    <h6>Your Order ID: <span class="label-order-id"></span></h6>
+			    <p>You'll receive an e-mail confirmation shortly for your records.</p>
+			    <h6><i class="icon-heart"></i> Show your support by sharing with friends!</h6>
+			  </div>
+			</div>
+		</article>
+	</section>
+</body>
+</html>
+
+<script>
+/*
+ * SDK for an easy to use cart on your own page
+ */
+  $(document).ready(function() {
+  	// Some CSS to make the page more usable
+  	$("#preorder-button").click(function() {
+  		$(".preorder-button").hide();
+  		$(".preorder-now").fadeIn();
+  	})
+
+  	// Initialize the cart with your email and some other variables
+    cart.init({
+      apiHost: "//localhost:3000",
+      sellerEmail: "badave@gmail.com",
+      namespace: "hoverboard",
+      currency: "usd",
+      shipping: 22.99
+    });
+
+    // For this example we are adding one product to the cart
+    cart.items = [{
+    	quantity: 1,
+    	slug: "hoverboard"
+    }]
+    // Events from the cart can be listened for and handled
+
+    // After the buyer clicks on the checkout button
+    $(window).on("orderBegan", function(event) {
+    	$('#btn-checkout').attr('disabled', 'disabled');
+    	$('#btn-checkout').text('Placing Order...');
+    });
+
+    // After an invalid input is found
+    $(window).on("orderInputInvalid", function(event, el) {
+    	// You can add your own validation, this tells you what element was invalid
+    	var $el = $(el);
+    	$el.addClass('error-box');
+    });
+
+    // After the order has failed
+    $(window).on("orderFailed", function(event) {
+    	var origText = "Place Order";
+    	$('#btn-checkout').text('Error Placing Order');
+
+    	setTimeout(function() {
+    		$('#btn-checkout').removeAttr('disabled');
+    		$('#btn-checkout').text(origText);
+    	}, 1000);
+    });
+
+    // And after the order is completed successfully 
+		$(window).on("orderComplete", function(event, order) {
+			$("#order-form").hide();
+			$(".label-order-id").text(order.id);
+			$("#order-confirmation").show();
+		});
+  });
+</script>
