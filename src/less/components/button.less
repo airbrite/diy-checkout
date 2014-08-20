@@ -1,0 +1,36 @@
+@button-font-weight: 500;
+@button-height: 45px;
+@button-border-radius: 40px;
+@button-margin: 30px;
+
+.Celery-Button {
+  display: block;
+  line-height: @button-height;
+  margin-bottom: @button-margin;
+  text-align: center;
+  font-size: @font-size-medium;
+  font-weight: @button-font-weight;
+  text-transform: uppercase;
+  background-color: @blue;
+  border-radius: @button-border-radius;
+  color: @white;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: lighten(@blue, 5%);
+  }
+
+  &:active {
+    background-color: darken(@blue, 15%);
+  }
+
+  &:focus {
+    outline: 0;
+    background-color: darken(@blue, 3%);
+  }
+
+  &.is-disabled {
+    background-color: lighten(@blue, 10%);
+  }
+}

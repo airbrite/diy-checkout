@@ -1,0 +1,70 @@
+@import 'mixins/transition';
+
+@input-border-radius: 3px;
+@input-height: 40px;
+@input-font-size: @font-size-base;
+
+.appearance-none() {
+  apperance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+}
+
+.input() {
+  .appearance-none;
+  .transition;
+  height: @input-height;
+  padding: 5px;
+  width: 100%;
+  font-size: @input-font-size;
+  border-radius: @input-border-radius;
+  border: @border-width solid @border-color;
+
+  &:focus {
+    outline: 0;
+    border-color: @border-focus-color;
+  }
+
+  &.is-invalid {
+    border-color: @state-error-color;
+  }
+
+  &.is-invalid ~ .Celery-Icon {
+    path,
+    rect {
+      fill: @state-error-color;
+    }
+  }
+
+  &.is-valid ~ .Celery-Icon {
+    path,
+    rect {
+      fill: @state-success-color;
+    }
+  }
+}
+
+.input-with-addon() {
+  padding-left: @icon-margin * 2 + @icon-inner-input-width - @border-width;
+}
+
+::-webkit-input-placeholder {
+  color: @gray;
+}
+
+// FF 4-18
+:-moz-placeholder {
+  color: @gray;
+  opacity: 1;
+}
+
+// FF 19+
+::-moz-placeholder {
+  color: @gray;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: @gray;
+}

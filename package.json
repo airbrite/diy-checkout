@@ -1,0 +1,32 @@
+{
+  "name": "diy-checkout",
+  "version": "0.0.0",
+  "description": "Example self-hosted Celery checkout",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "load-grunt-tasks": "^0.6.0",
+    "grunt-contrib-requirejs": "^0.4.4"
+  },
+  "devDependencies": {
+    "grunt-autoprefixer": "^1.0.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-less": "^0.11.4",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-svgmin": "^0.4.0",
+    "grunt-template": "^0.2.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/airbrite/diy-checkout.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/airbrite/diy-checkout/issues"
+  },
+  "homepage": "https://github.com/airbrite/diy-checkout"
+}

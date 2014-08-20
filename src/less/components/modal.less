@@ -1,0 +1,44 @@
+@modal-body-background-color: @gray-lightest;
+@modal-body-margin: 15px;
+@modal-border-radius: @border-radius-base;
+@modal-width: 480px;
+
+@modal-heading-gutter: 30px;
+@modal-heading-font-size: 38px;
+@modal-heading-color: @white;
+@modal-subheading-font-size: 18px;
+@modal-subheading-color: @gray-light;
+
+@modal-footer-color: @gray;
+@modal-footer-background-color: @white;
+
+.Celery-Modal-header {
+  margin: @modal-heading-gutter 0;
+}
+
+.Celery-Modal-heading {
+  &:extend(.Celery-Heading);
+  font-size: @modal-heading-font-size;
+  color: @white;
+}
+
+.Celery-Modal-subheading {
+  &:extend(.Celery-Heading);
+  font-size: @modal-subheading-font-size;
+  font-weight: 300;
+  color: @modal-subheading-color;
+}
+
+.Celery-Modal-body {
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+  width: @modal-width;
+  background: none @modal-body-background-color;
+  border-radius: @border-radius-large;
+}
+
+.Celery-Modal-footer {
+  text-align: center;
+  color: @modal-footer-color;
+}
