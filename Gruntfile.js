@@ -1,9 +1,6 @@
 module.exports = function(grunt) {
   'use strict';
 
-  var prodOrTest = /(production|test)/.test(process.env['NODE_ENV']);
-  var production = process.env['NODE_ENV'] === 'production';
-
   // Load all grunt tasks
   require('load-grunt-tasks')(grunt);
 
@@ -113,6 +110,10 @@ module.exports = function(grunt) {
       }
     },
 
+    connect: {
+      server: {}
+    },
+
     watch: {
       less: {
         files: ['src/less/**/*.less'],
@@ -134,6 +135,14 @@ module.exports = function(grunt) {
       }
     }
   });
+
+grunt.registerTask('serve', [
+  'less:development',
+  'svgmin',
+  'template',
+  'connect',
+  'watch'
+]);
 
   // Default task(s).
   grunt.registerTask('build', [
