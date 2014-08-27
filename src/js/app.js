@@ -100,6 +100,8 @@ define(function(require) {
     hide: function() {
       var self = this;
 
+      this.clear();
+
       // is-hidden uses opacity/transform so the transition occurs
       this.$overlay.addClass('is-hidden');
       this.$el.addClass('is-hidden');
@@ -107,9 +109,15 @@ define(function(require) {
       setTimeout(function() {
         self.$overlay.addClass('u-hidden');
         self.$el.addClass('u-hidden');
+        self.showShop();
       }, 300);
 
       return this;
+    },
+
+    clear: function() {
+      this.$form.find('input').val('');
+      this.$form.find('.is-invalid, .is-valid').removeClass('is-invalid is-valid');
     },
 
     updateOrderSummary: function() {
