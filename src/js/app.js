@@ -3,11 +3,12 @@ define(function(require) {
 
   var $ = require('jquery');
   var templates = require('templates');
-  var form = require('form').initialize();
-  var confirmation = require('confirmation').initialize();
   var formatMoney = require('format').formatMoney;
   var shop = require('shop');
   var celeryClient = require('celery_client');
+
+  var form = require('form').initialize();
+  var confirmation = require('confirmation').initialize();
 
   return {
     initialize: function() {
@@ -104,6 +105,11 @@ define(function(require) {
       }
 
       this.showConfirmation(res.data);
+      this.onConfirmation(res.data);
+    },
+
+    onConfirmation: function(data) {
+      // Runs on confirmation with order data
     },
 
     handleError: function(err) {
