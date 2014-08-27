@@ -41,10 +41,6 @@ module.exports = function(grunt) {
           findNestedDependencies: true,
           wrapShim: true,
 
-          paths: {
-            'jquery': 'empty:'
-          },
-
           // use our original main configuration file to avoid
           // duplication.  this file will pull in all our dependencies
           mainConfigFile: 'src/js/require-config.js',

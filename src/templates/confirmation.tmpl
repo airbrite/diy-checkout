@@ -1,0 +1,49 @@
+<div class="Celery-OrderConfirmation">
+  <span class="Celery-Icon Celery-Icon--check Celery-Icon--hero">
+  </span>
+
+  <div class="Celery-OrderConfirmation-header">
+    <h1 class="Celery-OrderConfirmation-heading">
+      Thank you<br /> for your support!
+    </h1>
+  </div>
+
+  <div class="Celery-OrderConfirmation-body">
+    Your pre-order number is #<%= number %>. A confirmation email is on the way to your inbox.
+  </div>
+
+  <div class="Celery-OrderConfirmation-footer">
+    <div class="Celery-OrderConfirmation-header">
+      <h2 class="Celery-OrderConfirmation-heading Celery-OrderConfirmation-heading--footer">
+        Share with your friends!
+      </h2>
+    </div>
+
+    <a class="Celery-ReferralLink"></a>
+
+    <div class="Celery-SocialButtons">
+      <ul class="Celery-SocialButtons-buttons">
+        <li class="Celery-SocialButtons-button Celery-SocialButtons-button--twitter">
+          <a class="Celery-Icon Celery-Icon--twitter"
+            href="<%= twitterHref %>"
+            target="_blank">
+            <span class="u-hiddenVisually">Twitter</span>
+          </a>
+        </li>
+        <li class="Celery-SocialButtons-button Celery-SocialButtons-button--facebook">
+          <a class="Celery-Icon Celery-Icon--facebook"
+            href="<%= facebookHref %>"
+            target="_blank">
+            <span class="u-hiddenVisually">Facebook</span>
+          </a>
+        </li>
+        <li class="Celery-SocialButtons-button Celery-SocialButtons-button--email">
+          <a class="Celery-Icon Celery-Icon--email"
+            href="<%= mailHref %>">
+            <span class="u-hiddenVisually">Email</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

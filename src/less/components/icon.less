@@ -4,6 +4,9 @@
 @icon-inner-input-width: 20px;
 @icon-margin: 13px;
 
+@twitter-blue: #3BB2E4;
+@facebook-blue: #4E71B0;
+
 .Celery-Icon path {
   fill: @gray-lighter;
   .transition(fill);
@@ -27,4 +30,25 @@
 
 .Celery-Icon--date svg {
   width: @icon-inner-input-width * .8;
+}
+
+.Celery-Icon--hero {
+  display: block;
+  margin-bottom: @grid-vertical-gutter;
+
+  path {
+    fill: @white;
+  }
+}
+
+.Celery-Icon--twitter path {
+  fill: @twitter-blue;
+}
+
+.Celery-Icon--facebook path {
+  fill: @facebook-blue;
+}
+
+.Celery-Icon--shareemail path {
+  fill: @gray;
 }

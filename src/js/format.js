@@ -3,7 +3,15 @@ define(function(require) {
 
   return {
     formatMoney: function(cents) {
-      return accounting.formatMoney(cents / 100);
+      var options = { precision: 2 };
+      var dollars = cents / 100;
+
+      // Don't show cents when .00
+      if (dollars % 1 === 0) {
+        options.precision = 0;
+      }
+
+      return accounting.formatMoney(dollars, options);
     }
   }
 });

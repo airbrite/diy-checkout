@@ -1,0 +1,49 @@
+@import 'mixins/transition';
+
+@social-buttons-button-border-size: 40px;
+
+.Celery-SocialButtons-buttons {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Celery-SocialButtons-button {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: @grid-small-gutter;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  a {
+    .transition(background-color);
+    display: inline-block;
+    width: @social-buttons-button-border-size;
+    height: @social-buttons-button-border-size;
+    background-color: @gray-lightest;
+    border-radius: @social-buttons-button-border-size / 2;
+
+    &:hover {
+      background-color: @gray-lighter;
+
+    }
+  }
+
+  .Celery-Icon--email path {
+    fill: @gray;
+  }
+
+  .Celery-Icon--twitter {
+    padding-top: 29%
+  }
+
+  .Celery-Icon--facebook {
+    padding-top: 26%
+  }
+
+  .Celery-Icon--email {
+    padding-top: 29%
+  }
+}

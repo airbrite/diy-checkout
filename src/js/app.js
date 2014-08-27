@@ -2,30 +2,35 @@ define(function(require) {
   'use strict';
 
   var $ = require('jquery');
-  var Celery = require('celery-js');
   var templates = require('templates');
   var form = require('form').initialize();
+  var confirmation = require('confirmation').initialize();
   var formatMoney = require('format').formatMoney;
-
-  var celeryClient = new Celery({
-    // Remove/comment out apiHost
-    apiHost: 'http://api-sandbox.trycelery.com',
-    // Replace example slug with your product ID
-    slug: '53ebdd5e1fd9c90400553dab'
-  });
+  var shop = require('shop');
+  var celeryClient = require('celery_client');
 
   return {
     initialize: function() {
-      var $overlay = $(templates.overlay);
+      var $overlay = this.$overlay = $(templates.overlay);
       var $modal = this.$el = $(templates.modal);
       var $form = this.$form = form.$el;
+      var $confirmation = this.$confirmation = confirmation.$el;
 
       this.children = [$overlay, $modal];
 
       // Binding
-      this._setShop = $.proxy(this._setShop, this);
-      this.updateOrderSummary = $.proxy(this.updateOrderSummary, this);
-      this.createOrder = $.proxy(this.createOrder, this);
+      $.each([
+        'show',
+        'hide',
+        'updateOrderSummary',
+        'createOrder',
+        'handleOrder',
+        'handleError',
+        'showShop',
+        'showConfirmation'
+      ], $.proxy(function(i, methodName) {
+        this[methodName] = $.proxy(this[methodName], this);
+      }, this));
 
       // Build form
       $form.find('.Celery-Icon--card').append($(templates.svg.card));
@@ -33,7 +38,9 @@ define(function(require) {
       $form.find('.Celery-Icon--date').append($(templates.svg.date));
       $form.find('.Celery-Icon--email').append($(templates.svg.email));
 
-      $modal.find('.Celery-Modal-body').append($form);
+      this.$modalBody = $modal.find('.Celery-Modal-body');
+
+      this.$el.on('click', '.Celery-ModalClose', this.hide);
 
       $form.on('valid', this.createOrder);
       $form.on('change', 'select', this.updateOrderSummary);
@@ -41,21 +48,13 @@ define(function(require) {
       $form.find('select').change();
 
       this.fetchShop();
-      this.show();
+      this.showShop();
+
+      return this;
     },
 
     fetchShop: function() {
-      celeryClient.fetchShop(null, this._setShop);
-    },
-
-    _setShop: function(err, data) {
-      if (err) {
-        return;
-      }
-
-      this.shop = data.data;
-
-      this.updateOrderSummary();
+      shop.fetch(this.updateOrderSummary);
     },
 
     show: function() {
@@ -63,18 +62,20 @@ define(function(require) {
       $(document.body).append(this.children);
       // next tick
       setTimeout(function() {
-        self.$el.removeClass('is-hidden');
+        self.$overlay.removeClass('u-hidden');
+        self.$el.removeClass('u-hidden');
       }, 0);
       return this;
     },
 
     hide: function() {
-      this.$el.addClass('is-hidden');
+      this.$overlay.addClass('u-hidden');
+      this.$el.addClass('u-hidden');
       return this;
     },
 
     updateOrderSummary: function() {
-      var shopData = this.shop;
+      var shopData = shop.data;
 
       if (!shopData) return;
 
@@ -94,12 +95,38 @@ define(function(require) {
     createOrder: function() {
       var order = this._generateOrder();
 
-      celeryClient.createOrder(order);
+      celeryClient.createOrder(order, this.handleOrder);
+    },
+
+    handleOrder: function(err, res) {
+      if (err) {
+        return this.handleError(err);
+      }
+
+      this.showConfirmation(res.data);
+    },
+
+    handleError: function(err) {
+      var $errors = this.$form.find('.Celery-FormSection--errors');
+
+      $errors.find('.Celery-FormSection-body').text(err.message);
+      $errors.removeClass('u-hidden');
+      form.enableBuyButton();
+    },
+
+    showShop: function() {
+      this.$modalBody.append(this.$form);
+    },
+
+    showConfirmation: function(data) {
+      confirmation.render(data);
+      this.$form.detach();
+      this.$modalBody.append(confirmation.$el);
+      this.$modalBody.addClass('Celery-Modal-body--confirmation');
     },
 
     _generateOrder: function() {
       var $form = this.$form;
-      var shop = this.shop;
       var order = {
         buyer: {},
         shipping_address: {},
@@ -114,7 +141,7 @@ define(function(require) {
         }
       };
 
-      order.user_id = shop.user_id;
+      order.user_id = shop.data.user_id;
       order.buyer.email = $form.find('[name=email]').val();
 
       // Card
@@ -134,7 +161,7 @@ define(function(require) {
 
       // Line Item
       var lineItem = {
-        product_id: shop.product._id,
+        product_id: shop.data.product._id,
         quantity: this._getQuantity()
       };
 
@@ -152,12 +179,16 @@ define(function(require) {
     },
 
     _getPrice: function() {
-      return this.shop.product.price;
+      return shop.data.product && shop.data.product.price;
     },
 
     _getShipping: function() {
       var quantity = this._getQuantity();
       var rates = this._getShippingRates();
+
+      if (!rates) {
+        return 0;
+      }
 
       var base = rates.base || 0;
       var item = rates.item || 0;
@@ -171,10 +202,10 @@ define(function(require) {
 
     // Gets shipping rates based on country, falls back to base
     _getShippingRates: function() {
-      var rates = this.shop.shipping_rates;
+      var rates = shop.data.shipping_rates;
       var result = rates;
 
-      if (!rates.countries.length) {
+      if (!rates || !rates.countries || !rates.countries.length) {
         return result;
       }
 

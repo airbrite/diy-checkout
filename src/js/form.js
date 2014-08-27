@@ -95,6 +95,14 @@ define(function(require) {
       $el.toggleClass('is-valid', isValid);
     },
 
+    enableBuyButton: function() {
+      this.$buyButton.removeClass('is-disabled');
+    },
+
+    disableBuyButton: function() {
+      this.$buyButton.addClass('is-disabled');
+    },
+
     submit: function(e) {
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -102,12 +110,16 @@ define(function(require) {
 
       var disabledClass = 'is-disabled';
 
-      this.$buyButton.addClass(disabledClass);
+      if (this.$buyButton.hasClass(disabledClass)) {
+        return;
+      }
+
+      this.disableBuyButton();
 
       var valid = this.validate();
 
       if (!valid) {
-        this.$buyButton.removeClass(disabledClass);
+        this.enableBuyButton();
         return;
       }
 
