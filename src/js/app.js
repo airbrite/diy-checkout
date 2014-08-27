@@ -11,9 +11,13 @@ define(function(require) {
   var confirmation = require('confirmation').initialize();
 
   return {
-    initialize: function() {
+    initialize: function(options) {
       if (this.initialized) {
         return this;
+      }
+
+      if (options && options.slug) {
+        celeryClient.config.slug = options.slug;
       }
 
       var $overlay = this.$overlay = $(templates.overlay);
@@ -45,6 +49,8 @@ define(function(require) {
 
       this.$modalBody = $modal.find('.Celery-Modal-body');
 
+      // Currently does not take slug from data-celery
+      $(document.body).on('click', '[data-celery]', this.show);
       this.$el.on('click', '.Celery-ModalCloseButton', this.hide);
 
       $form.on('valid', this.createOrder);
@@ -52,14 +58,23 @@ define(function(require) {
 
       $form.find('select').change();
 
-      this.fetchShop();
+      this.preloadShop();
       this.showShop();
-
-      $(document.body).on('click', '[data-celery]', this.show);
 
       this.initialized = true;
 
       return this;
+    },
+
+    preloadShop: function() {
+      var el = $('[data-celery]').first();
+      var slug = el && $(el).data('celery') || '';
+
+      if (slug) {
+        celeryClient.config.slug = slug;
+      }
+
+      this.fetchShop();
     },
 
     fetchShop: function() {
@@ -70,10 +85,13 @@ define(function(require) {
       var self = this;
       $(document.body).append(this.children);
       this.showShop();
+      this.$overlay.removeClass('u-hidden');
+      this.$el.removeClass('u-hidden');
+
       // next tick
       setTimeout(function() {
-        self.$overlay.removeClass('is-hidden');
         // is-hidden uses opacity/transform so the transition occurs
+        self.$overlay.removeClass('is-hidden');
         self.$el.removeClass('is-hidden');
       }, 0);
       return this;
@@ -82,10 +100,13 @@ define(function(require) {
     hide: function() {
       var self = this;
 
+      // is-hidden uses opacity/transform so the transition occurs
+      this.$overlay.addClass('is-hidden');
+      this.$el.addClass('is-hidden');
+
       setTimeout(function() {
-        self.$overlay.addClass('is-hidden');
-        // is-hidden uses opacity/transform so the transition occurs
-        self.$el.addClass('is-hidden');
+        self.$overlay.addClass('u-hidden');
+        self.$el.addClass('u-hidden');
       }, 300);
 
       return this;

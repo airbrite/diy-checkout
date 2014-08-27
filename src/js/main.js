@@ -3,6 +3,6 @@
 // Load config
 require(['require-config'], function(config) {
   require(['app'], function(app) {
-    window.CeleryCart = app;
+    return window.CeleryCart = app.initialize();
   });
 });
