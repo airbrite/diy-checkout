@@ -12,6 +12,10 @@ define(function(require) {
 
   return {
     initialize: function() {
+      if (this.initialized) {
+        return this;
+      }
+
       var $overlay = this.$overlay = $(templates.overlay);
       var $modal = this.$el = $(templates.modal);
       var $form = this.$form = form.$el;
@@ -41,7 +45,7 @@ define(function(require) {
 
       this.$modalBody = $modal.find('.Celery-Modal-body');
 
-      this.$el.on('click', '.Celery-ModalClose', this.hide);
+      this.$el.on('click', '.Celery-ModalCloseButton', this.hide);
 
       $form.on('valid', this.createOrder);
       $form.on('change', 'select', this.updateOrderSummary);
@@ -50,6 +54,10 @@ define(function(require) {
 
       this.fetchShop();
       this.showShop();
+
+      $(document.body).on('click', '[data-celery]', this.show);
+
+      this.initialized = true;
 
       return this;
     },
@@ -61,17 +69,25 @@ define(function(require) {
     show: function() {
       var self = this;
       $(document.body).append(this.children);
+      this.showShop();
       // next tick
       setTimeout(function() {
-        self.$overlay.removeClass('u-hidden');
-        self.$el.removeClass('u-hidden');
+        self.$overlay.removeClass('is-hidden');
+        // is-hidden uses opacity/transform so the transition occurs
+        self.$el.removeClass('is-hidden');
       }, 0);
       return this;
     },
 
     hide: function() {
-      this.$overlay.addClass('u-hidden');
-      this.$el.addClass('u-hidden');
+      var self = this;
+
+      setTimeout(function() {
+        self.$overlay.addClass('is-hidden');
+        // is-hidden uses opacity/transform so the transition occurs
+        self.$el.addClass('is-hidden');
+      }, 300);
+
       return this;
     },
 
@@ -120,15 +136,31 @@ define(function(require) {
       form.enableBuyButton();
     },
 
+    hideErrors: function() {
+      var $errors = this.$form.find('.Celery-FormSection--errors');
+      $errors.addClass('u-hidden');
+    },
+
+    hideHeader: function() {
+      this.$el.find('.Celery-Modal-header').addClass('is-hidden');
+    },
+
+    showHeader: function() {
+      this.$el.find('.Celery-Modal-header').removeClass('is-hidden');
+    },
+
     showShop: function() {
+      this.showHeader();
+      this.hideErrors();
+      this.$confirmation.detach();
       this.$modalBody.append(this.$form);
     },
 
     showConfirmation: function(data) {
       confirmation.render(data);
+      this.hideHeader();
       this.$form.detach();
       this.$modalBody.append(confirmation.$el);
-      this.$modalBody.addClass('Celery-Modal-body--confirmation');
     },
 
     _generateOrder: function() {

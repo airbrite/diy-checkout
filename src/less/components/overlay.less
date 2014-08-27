@@ -8,6 +8,10 @@
   bottom: 0;
   left: 0;
   background-color: @overlay-background-color;
-  animation-duration: .3s;
+  transition: opacity 0.2s ease-in-out;
   opacity: .9;
+
+  &.is-hidden {
+    opacity: 0;
+  }
 }
