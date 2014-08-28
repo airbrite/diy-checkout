@@ -1,7 +1,7 @@
 Celery Cart Example
 ============
 
-> Example of how to create an order
+> Example of how to create a self-hosted Celery powered cart
 
 ## Prerequisites
 
