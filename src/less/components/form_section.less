@@ -1,0 +1,59 @@
+@form-section-margin: @grid-small-gutter;
+@form-section-margin-bottom: @grid-vertical-gutter;
+
+@form-section-header-margin-bottom: 5px;
+@form-section-heading-font-size: 16px;
+@form-section-heading-font-weight: 400;
+
+@form-section-heading-line-height: 22px;
+
+.Celery-FormSection {
+  overflow: hidden;
+  margin-bottom: @form-section-margin-bottom;
+  clear: both;
+}
+
+@media screen and (max-width: @breakpoint-small) {
+  .Celery-FormSection {
+    margin-bottom: @form-section-margin-bottom / 2;
+  }
+}
+
+.Celery-FormSection--inline {
+  float: left;
+  display: inline;
+  clear: none;
+  width: 50%;
+  padding-right: @form-section-margin / 2;
+  padding-left: @form-section-margin / 2;
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+.Celery-FormSection-header {
+  margin-bottom: @form-section-header-margin-bottom;
+}
+
+.Celery-FormSection-heading {
+  font-size: @form-section-heading-font-size;
+  font-weight: @form-section-heading-font-weight;
+  margin: 0 0 @form-section-header-margin-bottom;
+}
+
+.Celery-FormSection-body {
+  margin-left: -@form-group-padding;
+  margin-right: -@form-group-padding;
+}
+
+.Celery-FormSection--errors {
+  border: 1px solid @state-error-color;
+  background-color: fade(@state-error-color, 10%);
+  border-radius: @input-border-radius;
+  padding: @grid-small-gutter;
+}

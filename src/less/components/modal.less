@@ -1,0 +1,75 @@
+@import 'mixins/transition';
+
+@modal-body-background-color: @gray-lightest;
+@modal-body-margin: 15px;
+@modal-border-radius: @border-radius-base;
+@modal-width: 480px;
+
+@modal-heading-gutter: 30px;
+@modal-heading-font-size: 38px;
+@modal-heading-color: @white;
+@modal-subheading-font-size: 18px;
+@modal-subheading-color: @gray-light;
+
+@modal-footer-color: @gray;
+@modal-footer-background-color: @white;
+
+.Celery-Modal-header {
+  margin: @modal-heading-gutter 0;
+  .transition(opacity);
+
+  &.is-hidden {
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: @breakpoint-small) {
+  .Celery-Modal-header {
+    margin-left: @modal-heading-gutter;
+    margin-right: @modal-heading-gutter;
+  }
+}
+
+.Celery-Modal-heading {
+  &:extend(.Celery-Heading);
+  font-size: @modal-heading-font-size;
+  color: @white;
+}
+
+.Celery-Modal-subheading {
+  &:extend(.Celery-Heading);
+  font-size: @modal-subheading-font-size;
+  font-weight: 300;
+  color: @modal-subheading-color;
+}
+
+@media screen and (max-width: @breakpoint-small) {
+  .Celery-Modal-heading {
+    font-size: 22px
+  }
+
+  .Celery-Modal-subheading {
+    font-size: 16px;
+  }
+}
+
+.Celery-Modal-body {
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+  width: @modal-width;
+  background: none @modal-body-background-color;
+  border-radius: @border-radius-large;
+}
+
+@media screen and (max-width: @breakpoint-small) {
+  .Celery-Modal-body {
+    width: auto;
+    border-radius: 0;
+  }
+}
+
+.Celery-Modal-footer {
+  text-align: center;
+  color: @modal-footer-color;
+}

@@ -1,0 +1,72 @@
+// https://gist.github.com/joaocunha/627301
+
+@import 'mixins/input';
+
+@select-font-color: @gray-darkest;
+
+@select-arrow-height: 6px;
+@select-arrow-width: 10px;
+@select-arrow-horizontal-offset: 17px;
+@select-arrow-vertical-offset: 17px;
+@select-arrow-color: @gray-lighter;
+
+.Celery-Select {
+  .input;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background-color: @white;
+  border: @border-width solid @border-color;
+
+  &.is-focused {
+    border-color: @border-focus-color;
+  }
+}
+
+// Custom Select component
+
+
+.Celery-Select-select {
+  .input;
+  display: block;
+  background-color: transparent;
+  border: 0 none;
+  color: @select-font-color;
+  width: 100%;
+  height: 100%;
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+// Arrow
+.Celery-Select:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  height: 0;
+  width: 0;
+  right: @select-arrow-horizontal-offset;
+  top: @select-arrow-vertical-offset;
+  border-top: @select-arrow-height solid @select-arrow-color;
+  border-right: @select-arrow-width / 2 solid transparent;
+  border-left: @select-arrow-width / 2 solid transparent;
+  pointer-events: none;
+}
+
+/* little trick for custom select elements in mozilla firefox  17/06/2014 @rodrigoludgero */
+
+/* pseudo class https://developer.mozilla.org/en-US/docs/Web/CSS/:any */
+@-moz-document url-prefix(){
+  .Celery-Select-select {
+    overflow: hidden;
+    width: 110%;
+  }
+}
+
+:-moz-any(.Celery-Select):before {
+  background-color: #fff; /* this is necessary for overcome the caret default browser */
+  pointer-events: none; /* https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events  */
+  z-index: 1; /* this is necessary for overcome the pseudo element */
+}

@@ -1,0 +1,56 @@
+@order-summary-font-weight: 300;
+
+@order-summary-number-font-size: 28px;
+@order-summary-number-color: @gray-darker;
+
+@order-summary-price-total-color: @gray-darkest;
+
+@order-summary-operator-font-size: 26px;
+@order-summary-operator-color: @gray-light;
+
+@order-summary-label-font-size: 11px;
+@order-summary-label-color: @gray-dark;
+
+.Celery-OrderSummary {
+  font-weight: @order-summary-font-weight;
+  margin-bottom: @grid-vertical-gutter;
+  text-align: center;
+}
+
+@media screen and (max-width: @breakpoint-small) {
+  .Celery-OrderSummary {
+    margin-bottom: @grid-vertical-gutter / 2;
+  }
+}
+
+.Celery-OrderSummary-line {
+  display: inline-block;
+}
+
+.Celery-OrderSummary-number {
+  display: block;
+  text-align: center;
+  font-size: @order-summary-number-font-size;
+  color: @order-summary-number-color;
+}
+
+.Celery-OrderSummary-price {
+  &:extend(.Celery-OrderSummary-number);
+}
+
+.Celery-OrderSummary-price--total {
+  color: @order-summary-price-total-color;
+  font-weight: 400;
+}
+
+.Celery-OrderSummary-label {
+  font-size: @order-summary-label-font-size;
+  color: @order-summary-label-color;
+  text-transform: uppercase;
+}
+
+.Celery-OrderSummary-operator {
+  vertical-align: top;
+  font-size: @order-summary-operator-font-size;
+  color: @order-summary-operator-color;
+}

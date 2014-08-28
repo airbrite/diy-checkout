@@ -1,0 +1,19 @@
+@modal-close-button-color: @gray-darker;
+@modal-close-button-font-size: 40px;
+@modal-close-button-font-weight: 200;
+
+.Celery-ModalCloseButton {
+  position: absolute;
+  z-index: @modal-zindex;
+  // &times; is much smaller than the line-height
+  top: @grid-small-gutter - 10px;
+  right: @grid-small-gutter;
+  color: @modal-close-button-color;
+  font-size: @modal-close-button-font-size;
+  font-weight: @modal-close-button-font-weight;
+  line-height: 1;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

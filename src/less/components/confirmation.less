@@ -1,0 +1,43 @@
+@order-confirmation-padding: @grid-vertical-gutter * 2;
+
+@order-confirmation-heading-font-size: 38px;
+@order-confirmation-heading-line-height: 1.1;
+
+@order-confirmation-heading-footer-font-size: 18px;
+@order-confirmation-heading-footer-line-height: 1.4;
+
+@order-confirmation-max-width: 300px;
+
+.Celery-OrderConfirmation {
+  padding-top: @order-confirmation-padding;
+  background-color: @green;
+  color: @white;
+  text-align: center;
+}
+
+.Celery-OrderConfirmation-header {
+  padding: 0;
+  margin: 0 0 @grid-vertical-gutter;
+}
+
+.Celery-OrderConfirmation-heading {
+  margin: 0 0 @grid-vertical-gutter * 2/3;
+  font-size: @order-confirmation-heading-font-size;
+  font-weight: 400;
+  line-height: @order-confirmation-heading-line-height;
+}
+
+.Celery-OrderConfirmation-heading--footer {
+  font-size: @order-confirmation-heading-footer-font-size;
+}
+
+.Celery-OrderConfirmation-body {
+  max-width: @order-confirmation-max-width;
+  margin: 0 auto @order-confirmation-padding;
+}
+
+.Celery-OrderConfirmation-footer {
+  color: @gray-darkest;
+  background-color: @white;
+  padding: @grid-vertical-gutter;
+}

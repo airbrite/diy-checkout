@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="10px" height="19px" viewBox="0 0 10 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.0.4 (8053) - http://www.bohemiancoding.com/sketch -->
+    <title>Imported Layers</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Designs" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Desktop---Thank-You" sketch:type="MSArtboardGroup" transform="translate(-640.000000, -725.000000)" fill="#4E71B0">
+            <g id="Checkout" sketch:type="MSLayerGroup" transform="translate(460.000000, 271.000000)">
+                <g id="Container" sketch:type="MSShapeGroup">
+                    <g id="Checkout" transform="translate(0.000000, 60.000000)">
+                        <g id="Share" transform="translate(0.000000, 275.000000)">
+                            <g id="Options" transform="translate(165.000000, 109.000000)">
+                                <g id="Fb">
+                                    <path d="M17.1635294,20.499875 L17.1635294,29 L21.2605882,29 L21.2605882,20.54025 L24.0570588,20.54025 L24.7335294,17.0139688 L21.2894118,17.0139688 L21.2894118,14.427 C21.2894118,14.0689687 21.4788235,13.5915937 22.0517647,13.5915937 L24.0429412,13.5915937 L24.0429412,10 L20.3252941,10 C19.0429412,10 17.1494118,11.5942187 17.1494118,13.289375 L17.1494118,16.913625 L15,16.913625 L15,20.4850312 L17.1635294,20.499875" id="Imported-Layers"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

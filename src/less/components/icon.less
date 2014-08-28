@@ -1,0 +1,54 @@
+@import 'mixins/transition';
+
+@icon-inner-input-height: @input-height - @border-width;
+@icon-inner-input-width: 20px;
+@icon-margin: 20px;
+
+@twitter-blue: #3BB2E4;
+@facebook-blue: #4E71B0;
+
+.Celery-Icon path {
+  fill: @gray-lighter;
+  .transition(fill);
+}
+
+// Icon inside of a text input
+.Celery-Icon--innerInput {
+  position: absolute;
+  display: block;
+  top: @border-width;
+  left: @icon-margin;
+  height: @icon-inner-input-height;
+  width: @icon-inner-input-width;
+  line-height: @input-height;
+
+  & svg {
+    pointer-events: none;
+    width: 100%;
+  }
+}
+
+.Celery-Icon--date svg {
+  width: @icon-inner-input-width * .8;
+}
+
+.Celery-Icon--hero {
+  display: block;
+  margin-bottom: @grid-vertical-gutter;
+
+  path {
+    fill: @white;
+  }
+}
+
+.Celery-Icon--twitter path {
+  fill: @twitter-blue;
+}
+
+.Celery-Icon--facebook path {
+  fill: @facebook-blue;
+}
+
+.Celery-Icon--shareemail path {
+  fill: @gray;
+}

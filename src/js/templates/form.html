@@ -1,0 +1,167 @@
+<form class="Celery-Form" novalidate>
+  <div class="Celery-Form-body">
+
+    <div class="Celery-FormSection Celery-FormSection--inline">
+      <div class="Celery-FormSection-header">
+        <h2 class="Celery-FormSection-heading">
+          Quantity
+        </h2>
+      </div>
+
+      <div class="Celery-FormSection-body">
+        <div class="Celery-Form-group">
+          <div class="Celery-Select">
+            <!-- Edit these options to set your quantity choices -->
+            <select class="Celery-Select-select" name="quantity">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="Celery-FormSection Celery-FormSection--inline">
+      <div class="Celery-FormSection-header">
+        <h2 class="Celery-FormSection-heading">
+          Shipping
+        </h2>
+      </div>
+
+      <div class="Celery-FormSection-body">
+        <div class="Celery-Form-group">
+          <div class="Celery-Select">
+            <!-- Edit these options for the countries you wish to ship to -->
+            <!-- "zz" is Unknown/TBD -->
+            <select class="Celery-Select-select" name="country">
+              <option value="us">United States</option>
+              <option value="zz">International</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="Celery-FormSection">
+      <div class="Celery-FormSection-header">
+        <h2 class="Celery-FormSection-heading">
+          Contact Information
+        </h2>
+      </div>
+
+      <div class="Celery-FormSection-body">
+        <div class="Celery-Form-group">
+          <input class="Celery-TextInput Celery-TextInput--email"
+            type="email"
+            placeholder="Email"
+            name="email"
+            data-celery-validate="email"
+            required />
+          <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--email">
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="Celery-FormSection">
+      <div class="Celery-FormSection-header">
+        <h2 class="Celery-FormSection-heading">
+          Payment
+        </h2>
+      </div>
+
+      <div class="Celery-FormSection-body">
+        <div class="Celery-Form-group">
+          <input class="Celery-TextInput Celery-TextInput--cardNumber"
+            type="text"
+            name="card_number"
+            pattern="\d*"
+            placeholder="Credit Card Number"
+            data-celery-validate="cardNumber" />
+          <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--card">
+          </span>
+        </div>
+        <div class="Celery-Form-group Celery-Form-group--inline Celery-Form-group--expiry">
+          <input class="Celery-TextInput Celery-TextInput--expiry"
+            type="text"
+            name="expiry"
+            pattern="\d*"
+            placeholder="MM / YY"
+            data-celery-validate="expiry"
+            maxlength="7"/>
+          <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--date">
+          </span>
+        </div>
+        <div class="Celery-Form-group Celery-Form-group--inline Celery-Form-group--cvc">
+          <input class="Celery-TextInput Celery-TextInput--cvc"
+            type="text"
+            name="cvc"
+            pattern="\d*"
+            placeholder="CVC"
+            autocomplete="off"
+            data-celery-validate="cvc"
+            maxlength="4" />
+          <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--cvc">
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="Celery-FormSection Celery-FormSection--errors u-hidden">
+      <div class="Celery-FormSection-body">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="Celery-Form-footer">
+    <div class="Celery-OrderSummary">
+      <div class="Celery-OrderSummary-line">
+        <span class="Celery-OrderSummary-price Celery-OrderSummary-price--price">
+          0
+        </span>
+        <span class="Celery-OrderSummary-label">Pre-Order</span>
+      </div>
+
+      <span class="Celery-OrderSummary-operator">&times;</span>
+
+      <div class="Celery-OrderSummary-line">
+        <span class="Celery-OrderSummary-number Celery-OrderSummary-number--quantity">
+          1
+        </span>
+        <span class="Celery-OrderSummary-label">Qty</span>
+      </div>
+
+      <span class="Celery-OrderSummary-operator">+</span>
+
+      <div class="Celery-OrderSummary-line">
+        <span class="Celery-OrderSummary-price Celery-OrderSummary-price--shipping">
+          0
+        </span>
+        <span class="Celery-OrderSummary-label">Ship</span>
+      </div>
+
+      <span class="Celery-OrderSummary-operator">=</span>
+
+      <div class="Celery-OrderSummary-line">
+        <span class="Celery-OrderSummary-price Celery-OrderSummary-price--total">
+          0
+        </span>
+        <span class="Celery-OrderSummary-label">Total</span>
+      </div>
+    </div>
+
+    <a class="Celery-Button Celery-Button--buy" href="#" tabindex="0">
+      Pre-Order Now
+    </a>
+
+    <div class="Celery-Note Celery-Note--subtle u-textCenter">
+      This page is secured with 128-bit encryption
+    </div>
+  </div>
+
+  <button class="Celery-HiddenSubmit" type="submit"></button>
+</form>

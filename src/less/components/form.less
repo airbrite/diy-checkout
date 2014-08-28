@@ -1,0 +1,21 @@
+.Celery-Form {
+  background-color: @gray-lightest;
+}
+
+.Celery-Form-body {
+  padding: @grid-vertical-gutter @grid-horizontal-gutter 0;
+}
+
+.Celery-Form-footer {
+  padding: @grid-vertical-gutter @grid-horizontal-gutter;
+  background-color: @white;
+}
+
+@media screen and (max-width: @breakpoint-small) {
+  .Celery-Form-body,
+  .Celery-Form-footer {
+    padding-top: @grid-vertical-gutter / 2;
+    padding-right: @grid-small-gutter;
+    padding-left: @grid-small-gutter;
+  }
+}
