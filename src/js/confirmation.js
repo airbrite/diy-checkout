@@ -30,10 +30,10 @@ define(function(require) {
       var slug = this._getSlug();
 
       var qs = $.param({
-        u: website || 'https://shop.trycelery.com/page/' + slug
+        u: website
       });
 
-      return "https://www.facebook.com/sharer/sharer.php?" + qs;
+      return 'https://www.facebook.com/sharer/sharer.php?' + qs;
     },
 
     generateTwitterHref: function(data) {
@@ -56,7 +56,7 @@ define(function(require) {
       pieces.push('on @trycelery');
 
       var qs = $.param({
-        url: website || 'https://shop.trycelery.com/page/' + slug,
+        url: website,
         text: pieces.join(' ')
       });
 
@@ -65,8 +65,9 @@ define(function(require) {
 
     generateMailHref: function(data) {
       var productName = this._getProductName();
+      var website = this._getWebsite();
 
-      return 'mailto:?subject=Check out ' + productName;
+      return 'mailto:?subject=Check out ' + productName + '&body=Check out ' + productName + ': ' + website;
     },
 
     _appendIcons: function() {
@@ -95,7 +96,8 @@ define(function(require) {
     },
 
     _getWebsite: function() {
-      return shopData.website;
+      var slug = this._getSlug();
+      return shopData.website || 'https://shop.trycelery.com/page/' + slug;
     }
   }
 });
