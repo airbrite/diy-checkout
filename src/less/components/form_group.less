@@ -1,9 +1,12 @@
 @form-group-margin: @grid-small-gutter;
+@form-group-padding: @grid-small-gutter / 2;
 
 .Celery-Form-group {
   position: relative;
   margin-bottom: @form-group-margin;
   overflow: hidden;
+  padding-right: @form-group-padding;
+  padding-left: @form-group-padding;
 
   &:last-child {
     margin-bottom: 0;
@@ -13,11 +16,6 @@
 .Celery-Form-group--inline {
   float: left;
   display: inline;
-  padding-right: @form-group-margin;
-
-  &:last-child {
-    padding-right: 0;
-  }
 }
 
 .Celery-Form-group--expiry {
@@ -25,5 +23,15 @@
 }
 
 .Celery-Form-group--cvc {
-  width: 7em;
+  width: 8em;
+}
+
+@media screen and (max-width: @breakpoint-small) {
+  .Celery-Form-group--expiry {
+    width: 50%;
+  }
+
+  .Celery-Form-group--cvc {
+    width: 50%;
+  }
 }

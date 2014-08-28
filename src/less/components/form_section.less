@@ -18,10 +18,15 @@
   display: inline;
   clear: none;
   width: 50%;
-  padding-left: @form-section-margin;
+  padding-right: @form-section-margin / 2;
+  padding-left: @form-section-margin / 2;
 
   &:first-child {
     padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
   }
 }
 
@@ -36,7 +41,8 @@
 }
 
 .Celery-FormSection-body {
-
+  margin-left: -@form-group-padding;
+  margin-right: -@form-group-padding;
 }
 
 .Celery-FormSection--errors {

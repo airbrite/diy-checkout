@@ -23,6 +23,13 @@
   }
 }
 
+@media screen and (max-width: @breakpoint-small) {
+  .Celery-Modal-header {
+    margin-left: @modal-heading-gutter;
+    margin-right: @modal-heading-gutter;
+  }
+}
+
 .Celery-Modal-heading {
   &:extend(.Celery-Heading);
   font-size: @modal-heading-font-size;
@@ -36,6 +43,16 @@
   color: @modal-subheading-color;
 }
 
+@media screen and (max-width: @breakpoint-small) {
+  .Celery-Modal-heading {
+    font-size: 22px
+  }
+
+  .Celery-Modal-subheading {
+    font-size: 16px;
+  }
+}
+
 .Celery-Modal-body {
   position: relative;
   overflow: hidden;
@@ -45,9 +62,10 @@
   border-radius: @border-radius-large;
 }
 
-@media screen and (max-width: 481px) {
+@media screen and (max-width: @breakpoint-small) {
   .Celery-Modal-body {
     width: auto;
+    border-radius: 0;
   }
 }
 

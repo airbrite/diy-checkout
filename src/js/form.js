@@ -96,11 +96,16 @@ define(function(require) {
     },
 
     enableBuyButton: function() {
-      this.$buyButton.removeClass('is-disabled');
+      this.$buyButton
+        .removeClass('is-disabled')
+        .text(this.buyButtonText);
     },
 
     disableBuyButton: function() {
-      this.$buyButton.addClass('is-disabled');
+      this.buyButtonText = this.$buyButton.text();
+      this.$buyButton
+        .addClass('is-disabled')
+        .text('Processing...');
     },
 
     submit: function(e) {
