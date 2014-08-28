@@ -13,7 +13,7 @@ Celery Cart Example
 
 * Create a product on [Celery](https://trycelery.com)
 * Note your product slug
-  * If you are in the dashboard, go to the product you want to sell. The slug is after `products`, ex. `/products/[slug]`.
+  * If you are in the dashboard, go to the product you want to sell. The slug is after `products` in the URL, ex. `/products/[slug]`.
 * Add `data-celery="[slug]"` to your button element.
   * ex. `<a href="#" data-celery="53ebdd5e1fd9c90400553dab">Pre-Order</a>`
 * Add [dist/celery-cart.min.js](https://github.com/airbrite/diy-checkout/blob/master/dist/celery-cart.min.js) and [dist/celery.css](https://github.com/airbrite/diy-checkout/blob/master/dist/celery-cart.min.js) to your site
