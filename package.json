@@ -19,7 +19,8 @@
   },
   "scripts": {
     "serve": "grunt serve",
-    "build": "grunt build"
+    "build": "grunt build",
+    "postinstall": "bower install --interactive=false"
   },
   "repository": {
     "type": "git",
