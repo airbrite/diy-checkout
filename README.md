@@ -47,7 +47,7 @@ Celery Checkout Example
 
 Currently, you must manually customize the templates to set the countries, quantity options, and copy (header, footer, etc). In the future, this will be more easily configured.
 
-### Getting up and running
+### Get up and running
 
 1. Clone this repo
 1. Install dependencies
@@ -57,10 +57,11 @@ Currently, you must manually customize the templates to set the countries, quant
 1. Replace `data-celery` value in `src/index.html` with your product id/slug
 1. Open `http://localhost:8000/src` in a browser
 
-### Styling and editing text
+### Edit text and styling
 
-1. Edit  `src/templates` and `src/less`
-  * **Note:** After editing `.less` files, the CSS will automatically update in the browser without refreshing
+1. To edit text and content, edit the files located in  `src/templates` 
+2. To customize styling, edit the files located in `src/less` 
+  * **Note:** After editing and saving the `.less` files, the CSS will automatically update in the browser without refreshing. You will be able to see the styling changes almost instantly.
 
 ### Put it on your website
 
