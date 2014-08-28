@@ -34,7 +34,9 @@ Currently, you must manually customize the templates to set the countries, quant
 * [Install node/npm](http://nodejs.org/)
 * Install Bower `npm install -g bower`
 * Run `npm install && bower install` in this repo folder
-* Run `grunt serve` to automatically start processing file changes and start a server
+* Run `npm run serve` to automatically start processing file changes and start a server
 * Replace `data-celery` value in `src/index.html` with your product slug
 * Open http://localhost:8000/src in a browser
 * Edit templates in `src/templates`
+
+When you are done customizing, run `npm run build` to generate the minimized files in `dist`.
