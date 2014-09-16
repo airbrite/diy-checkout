@@ -15,6 +15,7 @@ define(function(require) {
         }
       });
     },
+
     data: {}
   }
 });

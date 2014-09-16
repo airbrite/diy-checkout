@@ -4,13 +4,13 @@ require.config({
   baseUrl: 'js',
   paths: {
     'celery-js': 'vendor/celery-js/src/index',
+    hogan: 'vendor/hogan/web/builds/3.0.2/hogan-3.0.2.amd',
     'jquery.payment': 'vendor/jquery.payment/lib/jquery.payment',
-    text: 'vendor/requirejs-text/text',
-    tmpl: 'vendor/microtemplates/index'
+    text: 'vendor/requirejs-text/text'
   },
   map: {
     '*': {
-      'jquery': 'jquery-loader'
+      'jquery': 'jquery_loader'
     }
   },
   shim: {

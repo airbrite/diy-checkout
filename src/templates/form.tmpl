@@ -9,7 +9,7 @@
       </div>
 
       <div class="Celery-FormSection-body">
-        <div class="Celery-Form-group">
+        <div class="Celery-Form-group Celery-Form-group--quantity">
           <div class="Celery-Select">
             <!-- Edit these options to set your quantity choices -->
             <select class="Celery-Select-select" name="quantity">
@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div class="Celery-FormSection Celery-FormSection--inline">
+    <div class="Celery-FormSection {{^features.taxes}}Celery-FormSection--inline{{/features.taxes}}">
       <div class="Celery-FormSection-header">
         <h2 class="Celery-FormSection-heading">
           Shipping
@@ -32,7 +32,7 @@
       </div>
 
       <div class="Celery-FormSection-body">
-        <div class="Celery-Form-group">
+        <div class="Celery-Form-group Celery-Form-group--country {{#features.taxes}}Celery-Form-group--inline{{/features.taxes}}">
           <div class="Celery-Select">
             <!-- Edit these options for the countries you wish to ship to -->
             <!-- "zz" is Unknown/TBD -->
@@ -42,6 +42,17 @@
             </select>
           </div>
         </div>
+
+        {{#features.taxes}}
+          <div class="Celery-Form-group Celery-Form-group--inline">
+            <input class="Celery-TextInput Celery-TextInput--zip"
+              type="text"
+              name="shipping_zip"
+              pattern="[\w \d-]*"
+              placeholder="Zip Code"
+              data-celery-validate="required"/>
+          </div>
+        {{/features.taxes}}
       </div>
     </div>
 
@@ -58,8 +69,7 @@
             type="email"
             placeholder="Email"
             name="email"
-            data-celery-validate="email"
-            required />
+            data-celery-validate="email" />
           <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--email">
           </span>
         </div>
@@ -91,7 +101,7 @@
             pattern="\d*"
             placeholder="MM / YY"
             data-celery-validate="expiry"
-            maxlength="7"/>
+            maxlength="7" />
           <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--date">
           </span>
         </div>
@@ -139,16 +149,27 @@
 
       <div class="Celery-OrderSummary-line">
         <span class="Celery-OrderSummary-price Celery-OrderSummary-price--shipping">
-          0
+          $0
         </span>
         <span class="Celery-OrderSummary-label">Ship</span>
       </div>
+
+      {{#features.taxes}}
+        <span class="Celery-OrderSummary-operator">+</span>
+
+        <div class="Celery-OrderSummary-line">
+          <span class="Celery-OrderSummary-price Celery-OrderSummary-price--taxes">
+            $0
+          </span>
+          <span class="Celery-OrderSummary-label">Taxes</span>
+        </div>
+      {{/features.taxes}}
 
       <span class="Celery-OrderSummary-operator">=</span>
 
       <div class="Celery-OrderSummary-line">
         <span class="Celery-OrderSummary-price Celery-OrderSummary-price--total">
-          0
+          $0
         </span>
         <span class="Celery-OrderSummary-label">Total</span>
       </div>

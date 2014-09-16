@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     clean: {
-      html: ['src/js/templates/**/*.html'],
+      templates: ['src/js/templates/**/*.js'],
       svg: ['src/js/templates/svg/**/*.svg'],
       dist: ['dist']
     },
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
 
           // use our original main configuration file to avoid
           // duplication.  this file will pull in all our dependencies
-          mainConfigFile: 'src/js/require-config.js',
+          mainConfigFile: 'src/js/require_config.js',
           // the output optimized file name
           out: 'dist/celery-cart.min.js'
         }
@@ -98,15 +98,20 @@ module.exports = function(grunt) {
       }
     },
 
-    template: {
-      production: {
-        files: [{
-          expand: true,
-          cwd: 'src',
-          src: ['templates/*.tmpl'],
-          dest: 'src/js',
-          ext: '.html'
-        }]
+    hogan: {
+      compile: {
+        options: {
+          binderName: 'amd'
+        },
+        src: 'src/templates/*.tmpl',
+        dest: 'src/js/templates/index.js'
+        // files: [{
+        //   expand: true,
+        //   cwd: 'src',
+        //   src: ['templates/*.tmpl'],
+        //   dest: 'src/js',
+        //   ext: '.js'
+        // }]
       }
     },
 
@@ -123,9 +128,9 @@ module.exports = function(grunt) {
         files: ['src/svg/**/*.svg'],
         tasks: ['clean:svg', 'svgmin']
       },
-      html: {
+      templates: {
         files: ['src/templates/**/*.tmpl'],
-        tasks: ['clean:html', 'template']
+        tasks: ['clean:templates', 'templates']
       },
       livereload: {
         files: ['src/css/*.css'],
@@ -136,20 +141,22 @@ module.exports = function(grunt) {
     }
   });
 
-grunt.registerTask('serve', [
-  'less:development',
-  'svgmin',
-  'template',
-  'connect',
-  'watch'
-]);
+  grunt.registerTask('templates', ['hogan']);
+
+  grunt.registerTask('serve', [
+    'less:development',
+    'svgmin',
+    'templates',
+    'connect',
+    'watch'
+  ]);
 
   // Default task(s).
   grunt.registerTask('build', [
     'clean',
     'less:production',
     'autoprefixer',
-    'template',
+    'templates',
     'svgmin',
     'requirejs'
   ]);

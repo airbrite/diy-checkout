@@ -1,6 +1,12 @@
 define(function(require) {
-  var templates = require('templates');
+  var template = require('templates/index').confirmation;
   var shopData = require('shop').data;
+
+  // Icons
+  var checkIcon = require('text!templates/svg/check.svg');
+  var emailIcon = require('text!templates/svg/email.svg');
+  var facebookIcon = require('text!templates/svg/facebook.svg');
+  var twitterIcon = require('text!templates/svg/twitter.svg');
 
   return {
     initialize: function(data) {
@@ -11,7 +17,7 @@ define(function(require) {
     },
 
     $el: null,
-    template: templates.confirmation,
+    template: template,
     render: function(data) {
       data = data || this.data || {};
       data.twitterHref = this.generateTwitterHref();
@@ -72,10 +78,10 @@ define(function(require) {
 
     _appendIcons: function() {
       var $el = this.$el;
-      var $check = $(templates.svg.check);
-      var $twitter = $(templates.svg.twitter);
-      var $facebook = $(templates.svg.facebook);
-      var $email = $(templates.svg.email);
+      var $check = $(checkIcon);
+      var $twitter = $(twitterIcon);
+      var $facebook = $(facebookIcon);
+      var $email = $(emailIcon);
 
       $el.find('.Celery-Icon--check').append($check);
       $el.find('.Celery-Icon--twitter').append($twitter);
