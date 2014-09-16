@@ -2,11 +2,14 @@ define(function(require) {
   'use strict';
 
   var $ = require('jquery');
-  var templates = require('templates');
-  var formatMoney = require('format').formatMoney;
-  var shop = require('shop');
   var celeryClient = require('celery_client');
+  var shop = require('shop');
+  var config = require('config');
 
+  var templates = require('templates/index');
+  var overlayTemplate = templates.overlay;
+  var modalTemplate = templates.modal;
+  var formatMoney = require('format').formatMoney;
   var form = require('form').initialize();
   var confirmation = require('confirmation').initialize();
 
@@ -20,12 +23,15 @@ define(function(require) {
         celeryClient.config.slug = options.slug;
       }
 
-      var $overlay = this.$overlay = $(templates.overlay);
-      var $modal = this.$el = $(templates.modal);
+      var $overlay = this.$overlay = $(overlayTemplate());
+      var $modal = this.$el = $(modalTemplate());
       var $form = this.$form = form.$el;
       var $confirmation = this.$confirmation = confirmation.$el;
 
       this.children = [$overlay, $modal];
+
+      // Tax cache
+      this._taxes = {};
 
       // Binding
       $.each([
@@ -41,12 +47,6 @@ define(function(require) {
         this[methodName] = $.proxy(this[methodName], this);
       }, this));
 
-      // Build form
-      $form.find('.Celery-Icon--card').append($(templates.svg.card));
-      $form.find('.Celery-Icon--cvc').append($(templates.svg.cvc));
-      $form.find('.Celery-Icon--date').append($(templates.svg.date));
-      $form.find('.Celery-Icon--email').append($(templates.svg.email));
-
       this.$modalBody = $modal.find('.Celery-Modal-body');
 
       // Currently does not take slug from data-celery
@@ -54,7 +54,7 @@ define(function(require) {
       this.$el.on('click', '.Celery-ModalCloseButton', this.hide);
 
       $form.on('valid', this.createOrder);
-      $form.on('change', 'select', this.updateOrderSummary);
+      $form.on('change', 'select, [name=shipping_zip]', this.updateOrderSummary);
 
       $form.find('select').change();
 
@@ -132,6 +132,10 @@ define(function(require) {
 
       var $form = this.$form;
 
+      if (config.features.taxes && celeryClient.config.userId) {
+        this.updateTaxes();
+      }
+
       $form.find('.Celery-OrderSummary-price--price').text(price);
       $form.find('.Celery-OrderSummary-price--shipping').text(shipping);
       $form.find('.Celery-OrderSummary-price--total').text(total);
@@ -192,6 +196,34 @@ define(function(require) {
       this.$modalBody.append(confirmation.$el);
     },
 
+    updateTaxes: function() {
+      var countryCode = this._getCountry();
+      var zip = this._getZip();
+
+      if (this._taxes[countryCode + zip] !== undefined) {
+        var taxRate = this._taxes[countryCode + zip];
+        var tax = taxRate * this._getQuantity() * this._getPrice();
+
+        tax = formatMoney(tax);
+        this.$form.find('.Celery-OrderSummary-price--taxes').text(tax);
+
+        return;
+      }
+
+      celeryClient.fetchTaxes({
+        shipping_country: countryCode,
+        shipping_zip: zip
+      }, $.proxy(function(err, data) {
+        if (err || !data || !data.data || data.data.base === undefined) {
+          return;
+        }
+
+        this._taxes[countryCode + zip] = data.data.base;
+
+        this.updateTaxes();
+      }, this))
+    },
+
     _generateOrder: function() {
       var $form = this.$form;
       var order = {
@@ -226,6 +258,10 @@ define(function(require) {
       // Shipping
       order.shipping_address.country = $form.find('[name=country]').val();
 
+      if (config.features.taxes) {
+        order.shipping_address.zip = $form.find('[name=shipping_zip]').val()
+      }
+
       // Line Item
       var lineItem = {
         product_id: shop.data.product._id,
@@ -243,6 +279,16 @@ define(function(require) {
 
     _getCountry: function() {
       return this.$form.find('[name=country]').val();
+    },
+
+    _getZip: function() {
+      var $zip = this.$form.find('[name=shipping_zip]');
+
+      if (!$zip.length) {
+        return;
+      }
+
+      return $zip.val();
     },
 
     _getPrice: function() {

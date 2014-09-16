@@ -39,11 +39,7 @@ define(function(require) {
   }
 
   function required(value) {
-    if (!value || typeof value !== 'string') {
-      return false;
-    }
-
-    return true;
+    return present(value);
   }
 
   return {

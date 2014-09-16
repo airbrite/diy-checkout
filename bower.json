@@ -15,8 +15,9 @@
     "almond": "~0.2.9",
     "jquery.payment": "1.1.2",
     "accounting.js": "0.3.2",
-    "celery-js": "~0.0.1",
-    "suitcss-utils-display": "suitcss/utils-display#~0.4.1"
+    "celery-js": "0.0.0-alpha.1",
+    "suitcss-utils-display": "suitcss/utils-display#~0.4.1",
+    "hogan": "~3.0.2"
   },
   "devDependencies": {
     "requirejs": "~2.1.14",

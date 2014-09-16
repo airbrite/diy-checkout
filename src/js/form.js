@@ -1,13 +1,21 @@
 define(function(require) {
   'use strict';
 
-  var template = require('templates').form;
+  var config = require('config');
+  var template = require('templates/index').form;
   var $ = require('jquery');
   var validate = require('validation');
   require('jquery.payment');
 
+  // Icons
+  var cardIcon = require('text!templates/svg/card.svg');
+  var cvcIcon = require('text!templates/svg/cvc.svg');
+  var dateIcon = require('text!templates/svg/date.svg');
+  var emailIcon = require('text!templates/svg/email.svg');
+
   return {
     initialize: function() {
+      this.render();
       this.initFormatting();
 
       this.$buyButton = this.$el.find('.Celery-Button--buy');
@@ -28,7 +36,18 @@ define(function(require) {
       return this;
     },
 
-    $el: $(template),
+    $el: null,
+    template: template,
+
+    render: function() {
+      var data = $.extend({}, config);
+      var $el = this.$el = $(this.template(data));
+
+      $el.find('.Celery-Icon--card').append($(cardIcon));
+      $el.find('.Celery-Icon--cvc').append($(cvcIcon));
+      $el.find('.Celery-Icon--date').append($(dateIcon));
+      $el.find('.Celery-Icon--email').append($(emailIcon));
+    },
 
     initFormatting: function() {
       this.$cardEl = this.$el.find('.Celery-TextInput--cardNumber')

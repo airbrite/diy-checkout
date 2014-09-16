@@ -29,7 +29,7 @@ Celery Checkout Example
     <!-- Example button element -->
     <a href="#" data-celery="53ebdd5e1fd9c90400553dab">Pre-Order</a>
     ```
-    
+
 1. Add [dist/celery-cart.min.js](https://github.com/airbrite/diy-checkout/blob/master/dist/celery-cart.min.js) and [dist/celery.css](https://github.com/airbrite/diy-checkout/blob/master/dist/celery.css) to your site, where you put it is up to you:
 
     ```html
