@@ -13,7 +13,6 @@ Celery Checkout Example
 
 - Stripe only
 - No state-level shipping rate overrides
-- No taxes on checkout
 - No "Message to buyer"
 - No collections support
 - No product options or variants support
@@ -47,6 +46,8 @@ Celery Checkout Example
 
 Currently, you must manually customize the templates to set the countries, quantity options, and copy (header, footer, etc). In the future, this will be more easily configured.
 
+The templates are written in using Mustache ([Hogan](http://twitter.github.io/hogan.js/)).
+
 ### Get up and running
 
 1. Clone this repo
@@ -57,10 +58,14 @@ Currently, you must manually customize the templates to set the countries, quant
 1. Replace `data-celery` value in `src/index.html` with your product id/slug
 1. Open `http://localhost:8000/src` in a browser
 
+### Edit features
+
+Edit `src/js/config.js` and flip any feature flags before building.
+
 ### Edit text and styling
 
-1. To edit text and content, edit the files located in  `src/templates` 
-2. To customize styling, edit the files located in `src/less` 
+1. To edit text and content, edit the files located in  `src/templates`
+2. To customize styling, edit the files located in `src/less`
   * **Note:** After editing and saving the `.less` files, the CSS will automatically update in the browser without refreshing. You will be able to see the styling changes almost instantly.
 
 ### Put it on your website
@@ -91,5 +96,4 @@ This is just an example, you can shape it into whatever you want or just use it 
 ### Checkout features (tentative)
 
 * Variant support
-* Tax/Zip Code support
 * "Message to Buyer" support

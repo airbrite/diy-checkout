@@ -1,6 +1,6 @@
 {
   "name": "celery-diy-checkout",
-  "version": "0.0.1",
+  "version": "0.0.2-beta",
   "homepage": "https://github.com/airbrite/diy-checkout",
   "license": "MIT",
   "ignore": [
@@ -11,7 +11,6 @@
     "tests"
   ],
   "dependencies": {
-    "microtemplates": "~0.1.0",
     "almond": "~0.2.9",
     "jquery.payment": "1.1.2",
     "accounting.js": "0.3.2",
