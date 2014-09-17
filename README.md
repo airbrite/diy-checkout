@@ -7,7 +7,13 @@ Celery Checkout Example
 
 * Your site must use SSL
 * jQuery
-* If you want to support IE8/9, you must include an XDR plugin for Cross Domain calls. We recommend this one: [jQuery-ajaxTransport-XDomainRequest](https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest)
+
+### IE9
+
+If you want to support IE9, you must include some some plugins for placeholders and CORS support.
+
+* XDR plugin for Cross Domain calls, we recommend this one: [jQuery-ajaxTransport-XDomainRequest](https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest)
+* Placeholder polyfill, we recommend this one: [placeholdr](https://github.com/vote539/placeholdr)
 
 ## Limitations
 
