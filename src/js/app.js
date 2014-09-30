@@ -159,6 +159,19 @@ define(function(require) {
 
     onConfirmation: function(data) {
       // Runs on confirmation with order data
+      this._initTalkable(data);
+    },
+
+    _initTalkable: function(data) {
+      window._talkable_purchase = {
+        order_number: data.number,
+        email: data.buyer.email,
+        subtotal: data.subtotal / 100,
+        coupon_code: data.discount_codes[0]
+      };
+
+      _talkable.registerPurchase();
+      _talkable.showPP();
     },
 
     handleError: function(err) {
