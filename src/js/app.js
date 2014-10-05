@@ -197,9 +197,10 @@ define(function(require) {
       this.$modalBody.append(this.$form);
 
       var params = $.parseParams(window.location.search);
+      var coupon = params.coupon_code;
 
-      if (params.code) {
-        $('.Celery-TextInput--coupon').val(params.code);
+      if (coupon) {
+        $('.Celery-TextInput--coupon').val(coupon);
         this.updateDiscount();
       }
     },
