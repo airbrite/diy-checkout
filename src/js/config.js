@@ -6,7 +6,8 @@ define(function(require) {
     // apiHost: 'https://api-sandbox.trycelery.com',
     // slug: '53ebdd5e1fd9c90400553dab',
     features: {
-      taxes: false
+      taxes: false,
+      coupons: false
     }
   };
-})
+});

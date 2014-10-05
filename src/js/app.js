@@ -4,7 +4,9 @@ define(function(require) {
   var $ = require('jquery');
   var celeryClient = require('celery_client');
   var shop = require('shop');
+  var coupon = require('coupon');
   var config = require('config');
+  var debounce = require('util').debounce;
 
   var templates = require('templates/index');
   var overlayTemplate = templates.overlay;
@@ -54,7 +56,9 @@ define(function(require) {
       this.$el.on('click', '.Celery-ModalCloseButton', this.hide);
 
       $form.on('valid', this.createOrder);
-      $form.on('change', 'select, [name=shipping_zip]', this.updateOrderSummary);
+      $form.on('change', 'select, [name=shipping_zip]',
+        this.updateOrderSummary);
+      $form.on('keyup', '[name=coupon]', debounce($.proxy(this.updateDiscount, this), 500));
 
       $form.find('select').change();
 
@@ -128,7 +132,6 @@ define(function(require) {
       var quantity = this._getQuantity();
       var price = formatMoney(this._getPrice());
       var shipping = formatMoney(this._getShipping());
-      var total = formatMoney(this._getTotal());
 
       var $form = this.$form;
 
@@ -136,9 +139,14 @@ define(function(require) {
         this.updateTaxes();
       }
 
+      if (config.features.coupons && celeryClient.config.userId) {
+        this.updateDiscount();
+      }
+
+      this.updateTotal();
+
       $form.find('.Celery-OrderSummary-price--price').text(price);
       $form.find('.Celery-OrderSummary-price--shipping').text(shipping);
-      $form.find('.Celery-OrderSummary-price--total').text(total);
       $form.find('.Celery-OrderSummary-number--quantity').text(quantity);
     },
 
@@ -185,7 +193,7 @@ define(function(require) {
     showShop: function() {
       this.showHeader();
       this.hideErrors();
-      this.$confirmation.detach();
+      confirmation.$el.detach();
       this.$modalBody.append(this.$form);
     },
 
@@ -200,9 +208,10 @@ define(function(require) {
       var countryCode = this._getCountry();
       var zip = this._getZip();
 
+      // Cache hit
       if (this._taxes[countryCode + zip] !== undefined) {
         var taxRate = this._taxes[countryCode + zip];
-        var tax = taxRate * this._getQuantity() * this._getPrice();
+        var tax = taxRate * this._getSubtotal();
 
         tax = formatMoney(tax);
         this.$form.find('.Celery-OrderSummary-price--taxes').text(tax);
@@ -221,7 +230,42 @@ define(function(require) {
         this._taxes[countryCode + zip] = data.data.base;
 
         this.updateTaxes();
-      }, this))
+      }, this));
+    },
+
+    // Coupon adds a discount
+    updateDiscount: function() {
+      var code = this._getCouponCode();
+      var priceSelector = '.Celery-OrderSummary-price--coupon';
+      var operatorSelector = '.Celery-OrderSummary-operator.coupon';
+      var lineSelector = '.Celery-OrderSummary-line.coupon';
+      var groupSelector = lineSelector + ', ' + operatorSelector;
+
+      coupon.validate(code, $.proxy(function(valid) {
+        var discount;
+
+        this.updateTotal();
+
+        // TODO: Move coupon live validation to form
+        form._setCouponValidationClass(valid);
+
+        if (!valid || code === '') {
+          $(groupSelector).hide();
+          return;
+        }
+
+        // TODO: Discount logic instead of assuming single flat amount
+        discount = formatMoney(this._getDiscount());
+
+        $(priceSelector).text(discount);
+        $(groupSelector).show();
+      }, this));
+    },
+
+    updateTotal: function() {
+      var total = formatMoney(this._getTotal());
+
+      this.$form.find('.Celery-OrderSummary-price--total').text(total);
     },
 
     _generateOrder: function() {
@@ -241,25 +285,35 @@ define(function(require) {
       };
 
       order.user_id = shop.data.user_id;
-      order.buyer.email = $form.find('[name=email]').val();
+      order.buyer.email = this._getFieldValue('email');
 
       // Card
       var card = order.payment_source.card;
 
-      card.number = $form.find('[name=card_number]').val();
-      card.cvc = $form.find('[name=cvc]').val();
+      card.number = this._getFieldValue('card_number');
+      card.cvc = this._getFieldValue('cvc');
 
       // Card Expiry
-      var expiryParts = $form.find('[name=expiry]').val().split('/');
+      var expiry = this._getFieldValue('expiry');
+      var expiryParts = expiry.split('/');
 
       card.exp_month = expiryParts[0].trim();
       card.exp_year = expiryParts[1].trim();
 
       // Shipping
-      order.shipping_address.country = $form.find('[name=country]').val();
+      order.shipping_address.country = this._getCountry();
 
       if (config.features.taxes) {
-        order.shipping_address.zip = $form.find('[name=shipping_zip]').val()
+        order.shipping_address.zip = this._getZip();
+      }
+
+      // Coupon
+      if (config.features.coupons) {
+        var couponCode = this._getCouponCode();
+
+        if (couponCode) {
+          order.discount_codes = [couponCode];
+        }
       }
 
       // Line Item
@@ -273,26 +327,48 @@ define(function(require) {
       return order;
     },
 
+    _getDiscount: function() {
+      // TODO: Replace with coupon logic
+      var code = this._getCouponCode();
+      var data = coupon.data[code];
+
+      return data && data.amount || 0;
+    },
+
+    _getCouponCode: function() {
+      var code = this._getFieldValue('coupon') || '';
+
+      return code.toLowerCase();
+    },
+
     _getQuantity: function() {
-      return this.$form.find('[name=quantity]').val();
+      return this._getFieldValue('quantity');
     },
 
     _getCountry: function() {
-      return this.$form.find('[name=country]').val();
+      return this._getFieldValue('country');
     },
 
     _getZip: function() {
-      var $zip = this.$form.find('[name=shipping_zip]');
+      return this._getFieldValue('shipping_zip');
+    },
 
-      if (!$zip.length) {
+    _getFieldValue: function(fieldName) {
+      var $field = this.$form.find('[name=' + fieldName + ']');
+
+      if (!$field.length) {
         return;
       }
 
-      return $zip.val();
+      return $field.val();
     },
 
     _getPrice: function() {
       return shop.data.product && shop.data.product.price;
+    },
+
+    _getSubtotal: function() {
+      return this._getPrice() * this._getQuantity();
     },
 
     _getShipping: function() {
@@ -338,8 +414,9 @@ define(function(require) {
       var quantity = this._getQuantity();
       var price = this._getPrice();
       var shipping = this._getShipping();
+      var discount = this._getDiscount();
 
-      return (quantity * price) + shipping;
+      return (quantity * price) + shipping - discount;
     }
   };
 });

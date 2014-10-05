@@ -2,6 +2,7 @@ define(function(require) {
   'use strict';
 
   var config = require('config');
+  var coupon = require('coupon');
   var template = require('templates/index').form;
   var $ = require('jquery');
   var validate = require('validation');
@@ -60,8 +61,9 @@ define(function(require) {
         .payment('formatCardCVC');
     },
 
-    validate: function() {
+    validate: function(cb) {
       var valid = true;
+      var couponCode = $('.Celery-TextInput--coupon').val();
 
       this.$el.find('[data-celery-validate]').each($.proxy(function(i, el) {
         var isValid = this.validateField(el);
@@ -73,7 +75,36 @@ define(function(require) {
         }
       }, this));
 
-      return valid;
+      // If coupons are enabled, must asyncronously validate
+      if (config.features.coupons) {
+        if (!couponCode) {
+
+        }
+        // Validate then call cb
+        // Theoretically, we should already have the coupon data cached
+        // since we are doing live validation on keyup
+        return coupon.validate(couponCode, $.proxy(function(validCoupon) {
+          if (!validCoupon) {
+            valid = false;
+          }
+
+          this._setCouponValidationClass(validCoupon);
+
+          cb(valid);
+        }, this));
+      }
+
+      return cb(valid);
+    },
+
+    _setCouponValidationClass: function(valid) {
+      var $field = $('.Celery-TextInput--coupon');
+
+      if (!$field.val()) {
+        valid = true;
+      }
+
+      this._setValidationClass($field, valid);
     },
 
     validateField: function(el) {
@@ -87,6 +118,12 @@ define(function(require) {
       }
 
       var type = $el.data('celery-validate');
+
+      // No validation, is valid
+      if (!type) {
+        return true;
+      }
+
       var isValid = validate[type]($el.val());
 
       this._setValidationClass(el, isValid);
@@ -140,14 +177,14 @@ define(function(require) {
 
       this.disableBuyButton();
 
-      var valid = this.validate();
+      this.validate($.proxy(function(valid) {
+        if (!valid) {
+          this.enableBuyButton();
+          return;
+        }
 
-      if (!valid) {
-        this.enableBuyButton();
-        return;
-      }
-
-      this.$el.trigger('valid');
+        this.$el.trigger('valid');
+      }, this));
     }
   };
 });

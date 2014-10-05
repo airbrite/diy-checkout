@@ -120,6 +120,25 @@
       </div>
     </div>
 
+    {{#features.coupons}}
+      <div class="Celery-FormSection">
+        <div class="Celery-FormSection-header">
+          <h2 class="Celery-FormSection-heading">
+            Promo Code
+          </h2>
+        </div>
+
+        <div class="Celery-FormSection-body">
+          <div class="Celery-Form-group">
+            <input class="Celery-TextInput Celery-TextInput--coupon"
+              type="text"
+              name="coupon"
+              placeholder="Type your code" />
+          </div>
+        </div>
+      </div>
+    {{/features.coupons}}
+
     <div class="Celery-FormSection Celery-FormSection--errors u-hidden">
       <div class="Celery-FormSection-body">
 
@@ -144,6 +163,17 @@
         </span>
         <span class="Celery-OrderSummary-label">Qty</span>
       </div>
+
+      {{#features.coupons}}
+        <span class="Celery-OrderSummary-operator coupon" style="display: none;">-</span>
+
+        <div class="Celery-OrderSummary-line coupon" style="display: none;">
+          <span class="Celery-OrderSummary-price Celery-OrderSummary-price--coupon">
+            $0
+          </span>
+          <span class="Celery-OrderSummary-label">Coupon</span>
+        </div>
+      {{/features.coupons}}
 
       <span class="Celery-OrderSummary-operator">+</span>
 
