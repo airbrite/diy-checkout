@@ -195,6 +195,13 @@ define(function(require) {
       this.hideErrors();
       confirmation.$el.detach();
       this.$modalBody.append(this.$form);
+
+      var params = $.parseParams(window.location.search);
+
+      if (params.code) {
+        $('.Celery-TextInput--coupon').val(params.code);
+        this.updateDiscount();
+      }
     },
 
     showConfirmation: function(data) {
