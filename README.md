@@ -1,9 +1,11 @@
 Celery Custom Checkout Example
 ============
 
-> **What is this?** This is an example of how to create a custom, self-hosted checkout powered by the [Celery](https://trycelery.com) backend. <br/><br/>
-> **Why would I want this?** You can  make a beautifully branded and high-converting checkout. And because it's powered by Celery backend, you'll automatically get robust e-commerce and order management. <br/><br/>
-> **What can I do with this?** You can shape and extend the checkout interface and user experience into whatever you want or just use it as inspiration for your own checkout.
+> 1. **What is this?** This is an example of how to create a custom, self-hosted checkout powered by the [Celery](https://trycelery.com) backend. <br/><br/>
+> 1. **Why would I want this?** You can  make a beautifully branded and high-converting checkout. And because it's powered by Celery backend, you'll automatically get robust e-commerce and order management. Most likely, you'll fit one of these two use cases:
+    1. I'm an existing Celery merchant and I've outgrown the existing out-of-the-box checkout UI customizations.
+    1. I'm a person or company with a product and a website, and I want a quick way to set up pre-orders or e-commerce with a custom checkout UI without having to deal with building an e-commerce backend. <br/><br/>
+> 1. **What can I do with this?** You can tailor and extend the checkout interface and user experience into whatever you want or just use it as inspiration for your own checkout.
 
 ## Prerequisites
 
@@ -16,8 +18,9 @@ Celery Custom Checkout Example
 
 If you want to support IE9, you must include some some plugins for placeholders and CORS support.
 
-* XDR plugin for Cross Domain calls, we recommend this one: [jQuery-ajaxTransport-XDomainRequest](https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest)
-* Placeholder polyfill, we recommend this one: [placeholdr](https://github.com/vote539/placeholdr)
+* For XDR plugin for Cross Domain calls, we recommend [jQuery-ajaxTransport-XDomainRequest](https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest)
+* For placeholder polyfill, we recommend [placeholdr](https://github.com/vote539/placeholdr)
+* For input validation, we recommend [jQuery Splendid Textchange](https://github.com/pandell/jquery-splendid-textchange)
 
 ## Limitations
 
