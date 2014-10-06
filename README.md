@@ -1,14 +1,16 @@
-Celery Checkout Example
+Celery Custom Checkout Example
 ============
 
 > This is an example of how to create a self-hosted Celery-powered checkout. You can shape it into whatever you want or just use it as inspiration for your own checkout.
 
 ## Prerequisites
 
-* Your site must use SSL
+* A [Celery](https://trycelery.com) account
+* Your own website
+* Your website must use SSL
 * jQuery
 
-### IE9
+### IE9 Support
 
 If you want to support IE9, you must include some some plugins for placeholders and CORS support.
 
@@ -66,7 +68,16 @@ The templates are written in using Mustache ([Hogan](http://twitter.github.io/ho
 
 ### Edit features
 
-Edit `src/js/config.js` and flip any feature flags before building.
+Edit `src/js/config.js` and flip any feature flags before building. For example:
+
+```js
+{
+  features: {
+    taxes: true,
+    coupons: true
+  }
+}
+```
 
 ### Edit text and styling
 
@@ -88,7 +99,6 @@ Edit `src/js/config.js` and flip any feature flags before building.
     ```
 
 1.  Click on your "Pre-Order" link
-
 
 ## Future
 
