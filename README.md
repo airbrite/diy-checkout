@@ -63,7 +63,7 @@ The templates are written in using Mustache ([Hogan](http://twitter.github.io/ho
 
 ### Get up and running
 
-1. Clone this repo
+1. Fork this repo
 1. Install dependencies
   1. [Install node/npm](http://nodejs.org/)
   1. Run `npm install` in this repo folder
