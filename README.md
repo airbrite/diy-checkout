@@ -22,13 +22,24 @@ If you want to support IE9, you must include some some plugins for placeholders 
 * For placeholder polyfill, we recommend [placeholdr](https://github.com/vote539/placeholdr)
 * For input validation, we recommend [jQuery Splendid Textchange](https://github.com/pandell/jquery-splendid-textchange)
 
-## Limitations
+## Functional Specification
 
-- Stripe only
-- No state-level shipping rate overrides
-- No "Message to buyer"
-- No collections support
-- No product options or variants support
+**Checkout Features**
+
+* One-page checkout
+* Collect shipping addresses later
+* Quantity selection
+* Shipping country and ZIP/Postal Code
+* Shipping and tax rates based on country and ZIP/Postal Code
+* Promo/coupon codes
+
+**Checkout Limitations**
+
+* Stripe only (no PayPal or Affirm support)
+* No state-level shipping rate overrides
+* No "Message to buyer"
+* No collections support
+* No product options or variants support
 
 ## Getting Started
 
