@@ -32,6 +32,7 @@ If you want to support IE9, you must include some some plugins for placeholders 
 * Shipping country and ZIP/Postal Code
 * Shipping and tax rates based on country and ZIP/Postal Code
 * Promo/coupon codes
+* Credit card validation via Stripe
 
 **Checkout Limitations**
 
