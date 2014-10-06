@@ -1,7 +1,9 @@
 Celery Custom Checkout Example
 ============
 
-> This is an example of how to create a self-hosted Celery-powered checkout. You can shape it into whatever you want or just use it as inspiration for your own checkout.
+> **What is this?** This is an example of how to create a custom, self-hosted checkout powered by the [Celery](https://trycelery.com) backend. <br/>
+> **Why would I want this?** You can  make a beautifully branded and high-converting checkout. And because it's powered by Celery backend, you'll automatically get robust e-commerce and order management. <br/>
+> **What can I do with this?** You can shape and extend the checkout interface and user experience into whatever you want or just use it as inspiration for your own checkout.
 
 ## Prerequisites
 
