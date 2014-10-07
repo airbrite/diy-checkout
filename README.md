@@ -1,27 +1,38 @@
-Celery Checkout Example
+Celery Custom Checkout Example
 ============
 
-> This is an example of how to create a self-hosted Celery-powered checkout. You can shape it into whatever you want or just use it as inspiration for your own checkout.
+> 1. **What is this?** This is an example of how to create a custom, self-hosted checkout that is powered by the [Celery](https://trycelery.com) backend. You can add this checkout to any website and start selling with it right away.<br/><br/>
+> 1. **Why would I want this?** You can easily make a beautifully branded and high-converting checkout. And because it's powered by Celery backend, you'll automatically get robust e-commerce and order management. Most likely, you'll fit one of these two use cases:
+    1. I'm an existing Celery merchant and I've outgrown the existing out-of-the-box checkout UI customizations.
+    1. I'm a person or company with a product and a website, and I want a quick way to set up pre-orders or e-commerce with a custom checkout UI without having to deal with building an e-commerce backend. <br/><br/>
+> 1. **What can I do with this?** You can tailor and extend the checkout interface and user experience into whatever you want or just use it as inspiration for your own checkout.
 
 ## Prerequisites
 
-* Your site must use SSL
+* A [Celery](https://trycelery.com) account
+* Your own website
+* Your website must use SSL
 * jQuery
 
-### IE9
+## Functional Specification
 
-If you want to support IE9, you must include some some plugins for placeholders and CORS support.
+**Checkout Features**
 
-* XDR plugin for Cross Domain calls, we recommend this one: [jQuery-ajaxTransport-XDomainRequest](https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest)
-* Placeholder polyfill, we recommend this one: [placeholdr](https://github.com/vote539/placeholdr)
+* One-page checkout
+* Collect shipping addresses later
+* Quantity selection
+* Shipping country and ZIP/postal code
+* Shipping rates based on country 
+* Tax rates based on country or United States ZIP code
+* Promo/coupon codes
+* Social share buttons to Facebook, Twitter, and Pinterest
+* Credit card validation via Stripe
 
-## Limitations
+**Checkout Limitations**
 
-- Stripe only
-- No state-level shipping rate overrides
-- No "Message to buyer"
-- No collections support
-- No product options or variants support
+* Stripe only (no PayPal or Affirm support)
+* No state-level shipping rate overrides
+* No product options or variants support
 
 ## Getting Started
 
@@ -56,7 +67,7 @@ The templates are written in using Mustache ([Hogan](http://twitter.github.io/ho
 
 ### Get up and running
 
-1. Clone this repo
+1. Fork this repo
 1. Install dependencies
   1. [Install node/npm](http://nodejs.org/)
   1. Run `npm install` in this repo folder
@@ -66,9 +77,18 @@ The templates are written in using Mustache ([Hogan](http://twitter.github.io/ho
 
 ### Edit features
 
-Edit `src/js/config.js` and flip any feature flags before building.
+Edit `src/js/config.js` and flip any feature flags before building. For example:
 
-### Edit text and styling
+```js
+{
+  features: {
+    taxes: true,
+    coupons: true
+  }
+}
+```
+
+### Customize text and styling
 
 1. To edit text and content, edit the files located in  `src/templates`
 2. To customize styling, edit the files located in `src/less`
@@ -87,8 +107,17 @@ Edit `src/js/config.js` and flip any feature flags before building.
     <link rel="stylesheet" href="celery.css" />
     ```
 
-1.  Click on your "Pre-Order" link
+1. Click on your "Pre-Order" link. The checkout UI should pop up.
+1. **Congrats!** You are ready to sell via your very own custom checkout.
 
+If you have any questions or feedback on the process, please email us at [diy-checkout@trycelery.com](mailto:diy-checkout@trycelery.com)
+
+**IE9 Support**<br/>
+If you want to support IE9, you must include some some plugins for placeholders and CORS support.
+
+* For XDR plugin for Cross Domain calls, we recommend [jQuery-ajaxTransport-XDomainRequest](https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest)
+* For placeholder polyfill, we recommend [placeholdr](https://github.com/vote539/placeholdr)
+* For input validation, we recommend [jQuery Splendid Textchange](https://github.com/pandell/jquery-splendid-textchange)
 
 ## Future
 
@@ -99,7 +128,31 @@ This is just an example, you can shape it into whatever you want or just use it 
 * A customization config file will be available for easy basic customizations
 * More explicit styles to reduce weird interactions with existing CSS
 
-### Checkout features (tentative)
+### Celery Feature Incompatibilities
 
-* Variant support
-* "Message to Buyer" support
+**Note:** If you have any of these features configured in your Celery dashboard, they are not yet compatible with this DIY Checkout.
+
+**Products**
+
+* Product Options and Variants
+* Product Collections
+
+**Payments Settings**
+
+* PayPal
+* Affirm
+
+**Checkout Settings**
+
+* Require shipping address
+* Require company name
+* Require phone number
+* Optional "Add notes for seller"
+* "Message to your buyers"
+* Custom tracking scripts
+* Custom confirmation page
+
+**Apps**
+
+* Google Analytics
+
