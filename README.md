@@ -21,7 +21,7 @@ Celery Custom Checkout Example
 * One-page checkout
 * Collect shipping addresses later
 * Quantity selection
-* Shipping country and ZIP/costal code
+* Shipping country and ZIP/postal code
 * Shipping rates based on country 
 * Tax rates based on country or United States ZIP code
 * Promo/coupon codes
