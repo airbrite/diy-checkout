@@ -31,8 +31,6 @@ Celery Custom Checkout Example
 
 * Stripe only (no PayPal or Affirm support)
 * No state-level shipping rate overrides
-* No "Message to buyer"
-* No collections support
 * No product options or variants support
 
 ## Getting Started
@@ -89,7 +87,7 @@ Edit `src/js/config.js` and flip any feature flags before building. For example:
 }
 ```
 
-### Edit text and styling
+### Customize text and styling
 
 1. To edit text and content, edit the files located in  `src/templates`
 2. To customize styling, edit the files located in `src/less`
@@ -108,7 +106,8 @@ Edit `src/js/config.js` and flip any feature flags before building. For example:
     <link rel="stylesheet" href="celery.css" />
     ```
 
-1.  Click on your "Pre-Order" link. The checkout UI should pop up. Congrats!
+1. Click on your "Pre-Order" link. The checkout UI should pop up.
+1. **Congrats!** You are ready to sell via your very own custom checkout.
 
 **IE9 Support**<br/>
 If you want to support IE9, you must include some some plugins for placeholders and CORS support.
@@ -126,7 +125,30 @@ This is just an example, you can shape it into whatever you want or just use it 
 * A customization config file will be available for easy basic customizations
 * More explicit styles to reduce weird interactions with existing CSS
 
-### Checkout features (tentative)
+### Celery Feature Incompatibilities
 
-* Variant support
-* "Message to Buyer" support
+**Note:** If you have any of these features configured in your Celery dashboard, they are not yet compatible with this DIY Checkout.
+
+**Products**
+
+* Product Options and Variants
+* Product Collections
+
+**Payments Settings**
+
+* PayPal
+* Affirm
+
+**Checkout Settings**
+
+* Require shipping address
+* Require company name
+* Require phone number
+* Optional "Add notes for seller"
+* "Message to your buyers"
+* Custom tracking scripts
+* Custom confirmation page
+
+**Apps**
+
+* Google Analytics
