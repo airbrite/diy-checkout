@@ -14,13 +14,6 @@ Celery Custom Checkout Example
 * Your website must use SSL
 * jQuery
 
-**IE9 Support**<br/>
-If you want to support IE9, you must include some some plugins for placeholders and CORS support.
-
-* For XDR plugin for Cross Domain calls, we recommend [jQuery-ajaxTransport-XDomainRequest](https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest)
-* For placeholder polyfill, we recommend [placeholdr](https://github.com/vote539/placeholdr)
-* For input validation, we recommend [jQuery Splendid Textchange](https://github.com/pandell/jquery-splendid-textchange)
-
 ## Functional Specification
 
 **Checkout Features**
@@ -116,6 +109,14 @@ Edit `src/js/config.js` and flip any feature flags before building. For example:
     ```
 
 1.  Click on your "Pre-Order" link
+
+
+**IE9 Support**<br/>
+If you want to support IE9, you must include some some plugins for placeholders and CORS support.
+
+* For XDR plugin for Cross Domain calls, we recommend [jQuery-ajaxTransport-XDomainRequest](https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest)
+* For placeholder polyfill, we recommend [placeholdr](https://github.com/vote539/placeholdr)
+* For input validation, we recommend [jQuery Splendid Textchange](https://github.com/pandell/jquery-splendid-textchange)
 
 ## Future
 
