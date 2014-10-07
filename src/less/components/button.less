@@ -13,8 +13,15 @@
   text-transform: uppercase;
   background-color: @blue;
   border-radius: @button-border-radius;
-  color: @white;
   text-decoration: none;
+
+  &,
+  &:visited,
+  &:hover,
+  &:active,
+  &:focus {
+    color: @white;
+  }
 
   &:hover {
     cursor: pointer;

@@ -77,9 +77,6 @@ define(function(require) {
 
       // If coupons are enabled, must asyncronously validate
       if (config.features.coupons) {
-        if (!couponCode) {
-
-        }
         // Validate then call cb
         // Theoretically, we should already have the coupon data cached
         // since we are doing live validation on keyup
