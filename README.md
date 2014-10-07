@@ -108,8 +108,7 @@ Edit `src/js/config.js` and flip any feature flags before building. For example:
     <link rel="stylesheet" href="celery.css" />
     ```
 
-1.  Click on your "Pre-Order" link
-
+1.  Click on your "Pre-Order" link. The checkout UI should pop up. Congrats!
 
 **IE9 Support**<br/>
 If you want to support IE9, you must include some some plugins for placeholders and CORS support.
