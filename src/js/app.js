@@ -215,6 +215,7 @@ define(function(require) {
 
         tax = formatMoney(tax);
         this.$form.find('.Celery-OrderSummary-price--taxes').text(tax);
+        this.updateTotal();
 
         return;
       }
@@ -410,13 +411,28 @@ define(function(require) {
       return result;
     },
 
+    _getTaxes: function() {
+      var countryCode = this._getCountry();
+      var zip = this._getZip();
+
+      if (this._taxes[countryCode + zip] !== undefined) {
+        var taxRate = this._taxes[countryCode + zip];
+        var taxes = taxRate * this._getSubtotal();
+
+        return taxes;
+      }
+
+      return 0;
+    },
+
     _getTotal: function() {
       var quantity = this._getQuantity();
       var price = this._getPrice();
       var shipping = this._getShipping();
       var discount = this._getDiscount();
+      var taxes = this._getTaxes();
 
-      return (quantity * price) + shipping - discount;
+      return (quantity * price) + shipping + taxes - discount;
     }
   };
 });
