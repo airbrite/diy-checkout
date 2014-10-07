@@ -1,6 +1,6 @@
 {
   "name": "diy-checkout",
-  "version": "0.0.2-beta",
+  "version": "1.0.0",
   "description": "Example self-hosted Celery checkout",
   "main": "Gruntfile.js",
   "dependencies": {},
