@@ -14,7 +14,7 @@ Celery Custom Checkout Example
 * Your website must use SSL
 * jQuery
 
-**IE9 Support**
+**IE9 Support**<br/>
 If you want to support IE9, you must include some some plugins for placeholders and CORS support.
 
 * For XDR plugin for Cross Domain calls, we recommend [jQuery-ajaxTransport-XDomainRequest](https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest)
