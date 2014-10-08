@@ -40,6 +40,7 @@ define(function(require) {
         'show',
         'hide',
         'updateOrderSummary',
+        'updateDiscount',
         'createOrder',
         'handleOrder',
         'handleError',
@@ -58,7 +59,7 @@ define(function(require) {
       $form.on('valid', this.createOrder);
       $form.on('change', 'select, [name=shipping_zip]',
         this.updateOrderSummary);
-      $form.on('keyup', '[name=coupon]', debounce($.proxy(this.updateDiscount, this), 500));
+      $form.on('keyup', '[name=coupon]', debounce(this.updateDiscount, 500));
 
       $form.find('select').change();
 
