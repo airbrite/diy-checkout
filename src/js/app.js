@@ -63,7 +63,6 @@ define(function(require) {
 
       $form.find('select').change();
 
-      this.preloadShop();
       this.showShop();
 
       this.initialized = true;
@@ -71,7 +70,8 @@ define(function(require) {
       return this;
     },
 
-    preloadShop: function() {
+    loadShop: function() {
+      // TODO: Support passing slug
       var el = $('[data-celery]').first();
       var slug = el && $(el).data('celery') || '';
 
@@ -79,17 +79,20 @@ define(function(require) {
         celeryClient.config.slug = slug;
       }
 
-      this.fetchShop();
-    },
-
-    fetchShop: function() {
       shop.fetch(this.updateOrderSummary);
     },
 
     show: function() {
       var self = this;
+
+      // Load shop data if it wasn't loaded yet
+      if (!shop.data.user_id) {
+        this.loadShop();
+      }
+
       $(document.body).append(this.children);
       this.showShop();
+      // Sets display
       this.$overlay.removeClass('u-hidden');
       this.$el.removeClass('u-hidden');
 
@@ -112,6 +115,7 @@ define(function(require) {
       this.$el.addClass('is-hidden');
 
       setTimeout(function() {
+        // Sets display after 300ms
         self.$overlay.addClass('u-hidden');
         self.$el.addClass('u-hidden');
         self.showShop();
