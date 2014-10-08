@@ -1,4 +1,4 @@
-Celery Custom Checkout Example
+Custom Checkout Example
 ============
 
 ![Checkout Start Page](http://cl.ly/image/3J0t0r2c0a2V/Desktop%20-%20Start.png)
