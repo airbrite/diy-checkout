@@ -1,3 +1,5 @@
+@import 'mixins/transition';
+
 @overlay-background-color: @gray-darkest;
 
 .Celery-Overlay {
@@ -8,8 +10,8 @@
   bottom: 0;
   left: 0;
   background-color: @overlay-background-color;
-  transition: opacity 0.2s ease-in-out;
   opacity: .97;
+  .transition(opacity);
 
   &.is-hidden {
     opacity: 0;
