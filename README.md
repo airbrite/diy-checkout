@@ -113,7 +113,7 @@ Edit `src/js/config.js` and flip any feature flags before building. For example:
 1. Click on your "Pre-Order" link. The checkout UI should pop up.
 1. **Congrats!** You are ready to sell via your very own custom checkout.
 
-If you have any questions or feedback on the process, please email us at [diy-checkout@trycelery.com](mailto:diy-checkout@trycelery.com)
+If you have any questions or feedback on the process, please create a Github issue for this repo. Thanks!
 
 **IE9 Support**<br/>
 If you want to support IE9, you must include some some plugins for placeholders and CORS support.
