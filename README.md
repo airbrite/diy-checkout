@@ -25,7 +25,7 @@ Custom Checkout Example
 * Collect shipping addresses later
 * Quantity selection
 * Shipping country and ZIP/postal code
-* Shipping rates based on country 
+* Shipping rates based on country
 * Tax rates based on country or United States ZIP code
 * Promo/coupon codes
 * Social share buttons to Facebook, Twitter, and Pinterest
@@ -36,6 +36,7 @@ Custom Checkout Example
 * Stripe only (no PayPal or Affirm support)
 * No state-level shipping rate overrides
 * No product options or variants support
+* Only supports flat $ off coupons (not percent off or free shipping)
 
 ## Getting Started
 
@@ -54,7 +55,7 @@ Custom Checkout Example
     ```html
     <!-- Include jQuery before celery-cart.min.js -->
     <script src="jquery.js"></script>
-    
+
     <script src="celery-cart.min.js"></script>
     <link rel="stylesheet" href="celery.css" />
     ```
@@ -105,7 +106,7 @@ Edit `src/js/config.js` and flip any feature flags before building. For example:
     ```html
     <!-- Include jQuery before celery-cart.min.js -->
     <script src="jquery.js"></script>
-    
+
     <script src="celery-cart.min.js"></script>
     <link rel="stylesheet" href="celery.css" />
     ```
