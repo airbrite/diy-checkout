@@ -40,6 +40,7 @@ define(function(require) {
         'show',
         'hide',
         'updateOrderSummary',
+        'updateDiscount',
         'createOrder',
         'handleOrder',
         'handleError',
@@ -58,11 +59,10 @@ define(function(require) {
       $form.on('valid', this.createOrder);
       $form.on('change', 'select, [name=shipping_zip]',
         this.updateOrderSummary);
-      $form.on('keyup', '[name=coupon]', debounce($.proxy(this.updateDiscount, this), 500));
+      $form.on('keyup', '[name=coupon]', debounce(this.updateDiscount, 500));
 
       $form.find('select').change();
 
-      this.preloadShop();
       this.showShop();
 
       this.initialized = true;
@@ -70,7 +70,8 @@ define(function(require) {
       return this;
     },
 
-    preloadShop: function() {
+    loadShop: function() {
+      // TODO: Support passing slug
       var el = $('[data-celery]').first();
       var slug = el && $(el).data('celery') || '';
 
@@ -78,17 +79,20 @@ define(function(require) {
         celeryClient.config.slug = slug;
       }
 
-      this.fetchShop();
-    },
-
-    fetchShop: function() {
       shop.fetch(this.updateOrderSummary);
     },
 
     show: function() {
       var self = this;
+
+      // Load shop data if it wasn't loaded yet
+      if (!shop.data.user_id) {
+        this.loadShop();
+      }
+
       $(document.body).append(this.children);
       this.showShop();
+      // Sets display
       this.$overlay.removeClass('u-hidden');
       this.$el.removeClass('u-hidden');
 
@@ -111,6 +115,7 @@ define(function(require) {
       this.$el.addClass('is-hidden');
 
       setTimeout(function() {
+        // Sets display after 300ms
         self.$overlay.addClass('u-hidden');
         self.$el.addClass('u-hidden');
         self.showShop();
@@ -215,6 +220,7 @@ define(function(require) {
 
         tax = formatMoney(tax);
         this.$form.find('.Celery-OrderSummary-price--taxes').text(tax);
+        this.updateTotal();
 
         return;
       }
@@ -410,13 +416,28 @@ define(function(require) {
       return result;
     },
 
+    _getTaxes: function() {
+      var countryCode = this._getCountry();
+      var zip = this._getZip();
+
+      if (this._taxes[countryCode + zip] !== undefined) {
+        var taxRate = this._taxes[countryCode + zip];
+        var taxes = taxRate * this._getSubtotal();
+
+        return taxes;
+      }
+
+      return 0;
+    },
+
     _getTotal: function() {
       var quantity = this._getQuantity();
       var price = this._getPrice();
       var shipping = this._getShipping();
       var discount = this._getDiscount();
+      var taxes = this._getTaxes();
 
-      return (quantity * price) + shipping - discount;
+      return (quantity * price) + shipping + taxes - discount;
     }
   };
 });

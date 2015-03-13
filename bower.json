@@ -1,6 +1,6 @@
 {
   "name": "celery-diy-checkout",
-  "version": "0.0.2-beta",
+  "version": "1.0.0",
   "homepage": "https://github.com/airbrite/diy-checkout",
   "license": "MIT",
   "ignore": [
