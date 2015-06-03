@@ -4,7 +4,7 @@
     <div class="Celery-FormSection Celery-FormSection--inline">
       <div class="Celery-FormSection-header">
         <h2 class="Celery-FormSection-heading">
-          Quantity
+         {{quantity}}
         </h2>
       </div>
 
@@ -27,7 +27,7 @@
     <div class="Celery-FormSection {{^features.taxes}}Celery-FormSection--inline{{/features.taxes}}">
       <div class="Celery-FormSection-header">
         <h2 class="Celery-FormSection-heading">
-          Shipping
+          {{shipping}}
         </h2>
       </div>
 
@@ -37,8 +37,8 @@
             <!-- Edit these options for the countries you wish to ship to -->
             <!-- "zz" is Unknown/TBD -->
             <select class="Celery-Select-select" name="country">
-              <option value="us">United States</option>
-              <option value="zz">International</option>
+              <option value="{{contry.us.value}}">{{contry.us.name}}</option>
+              <option value="{{contry.int.value}}">{{contry.int.name}}</option>
             </select>
           </div>
         </div>
@@ -59,7 +59,7 @@
     <div class="Celery-FormSection">
       <div class="Celery-FormSection-header">
         <h2 class="Celery-FormSection-heading">
-          Contact Information
+         {{contact}}
         </h2>
       </div>
 
@@ -79,7 +79,7 @@
     <div class="Celery-FormSection">
       <div class="Celery-FormSection-header">
         <h2 class="Celery-FormSection-heading">
-          Payment
+           {{pay}}
         </h2>
       </div>
 
@@ -124,7 +124,7 @@
       <div class="Celery-FormSection">
         <div class="Celery-FormSection-header">
           <h2 class="Celery-FormSection-heading">
-            Promo Code
+            {{promo}}
           </h2>
         </div>
 
@@ -133,7 +133,7 @@
             <input class="Celery-TextInput Celery-TextInput--coupon"
               type="text"
               name="coupon"
-              placeholder="Type your code" />
+              placeholder="{{promoType}}" />
           </div>
         </div>
       </div>
@@ -161,7 +161,7 @@
         <span class="Celery-OrderSummary-number Celery-OrderSummary-number--quantity">
           1
         </span>
-        <span class="Celery-OrderSummary-label">Qty</span>
+        <span class="Celery-OrderSummary-label">{{qty}}</span>
       </div>
 
       {{#features.coupons}}
@@ -181,7 +181,7 @@
         <span class="Celery-OrderSummary-price Celery-OrderSummary-price--shipping">
           $0
         </span>
-        <span class="Celery-OrderSummary-label">Ship</span>
+        <span class="Celery-OrderSummary-label">{{ship}}</span>
       </div>
 
       {{#features.taxes}}
@@ -191,7 +191,7 @@
           <span class="Celery-OrderSummary-price Celery-OrderSummary-price--taxes">
             $0
           </span>
-          <span class="Celery-OrderSummary-label">Taxes</span>
+          <span class="Celery-OrderSummary-label">{{taxes}}</span>
         </div>
       {{/features.taxes}}
 
@@ -206,11 +206,11 @@
     </div>
 
     <a class="Celery-Button Celery-Button--buy" href="#" tabindex="0">
-      Pre-Order Now
+    {{preorder}}
     </a>
 
     <div class="Celery-Note Celery-Note--subtle u-textCenter">
-      This page is secured with 128-bit encryption
+     {{secure}}
     </div>
   </div>
 
