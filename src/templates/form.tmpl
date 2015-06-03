@@ -89,7 +89,7 @@
             type="text"
             name="card_number"
             pattern="\d*"
-            placeholder="Credit Card Number"
+            placeholder="{{card.number}}"
             data-celery-validate="cardNumber" />
           <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--card">
           </span>
@@ -99,7 +99,7 @@
             type="text"
             name="expiry"
             pattern="\d*"
-            placeholder="MM / YY"
+            placeholder="{{card.date}}"
             data-celery-validate="expiry"
             maxlength="7" />
           <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--date">
@@ -112,7 +112,7 @@
             pattern="\d*"
             placeholder="CVC"
             autocomplete="off"
-            data-celery-validate="cvc"
+            data-celery-validate="{{card.cvc}}"
             maxlength="4" />
           <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--cvc">
           </span>
