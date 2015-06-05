@@ -292,6 +292,8 @@ define(function (require) {
 
             order.user_id = shop.data.user_id;
             order.buyer.email = this._getFieldValue('email');
+            order.buyer.first_name = this._getFieldValue('first-name');
+            order.buyer.last_name = this._getFieldValue('last-name');
 
             // Card
             var card = order.payment_source.card;

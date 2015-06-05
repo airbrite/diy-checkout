@@ -1,13 +1,13 @@
 <form class="Celery-Form" novalidate>
   <div class="Celery-Form-body">
 
+    {{#features.quantity}}
     <div class="Celery-FormSection Celery-FormSection--inline">
       <div class="Celery-FormSection-header">
         <h2 class="Celery-FormSection-heading">
          {{quantity}}
         </h2>
       </div>
-
       <div class="Celery-FormSection-body">
         <div class="Celery-Form-group Celery-Form-group--quantity">
           <div class="Celery-Select">
@@ -23,7 +23,11 @@
         </div>
       </div>
     </div>
-
+    {{/features.quantity}}
+    {{^features.quantity}}
+     <input type="hidden" id="quantity" name="quantity" value="1" />
+    {{/features.quantity}}
+    {{#features.shipping}}
     <div class="Celery-FormSection {{^features.taxes}}Celery-FormSection--inline{{/features.taxes}}">
       <div class="Celery-FormSection-header">
         <h2 class="Celery-FormSection-heading">
@@ -42,7 +46,6 @@
             </select>
           </div>
         </div>
-
         {{#features.taxes}}
           <div class="Celery-Form-group Celery-Form-group--inline">
             <input class="Celery-TextInput Celery-TextInput--zip"
@@ -55,6 +58,7 @@
         {{/features.taxes}}
       </div>
     </div>
+    {{/features.shipping}}
 
     <div class="Celery-FormSection">
       <div class="Celery-FormSection-header">
@@ -65,9 +69,33 @@
 
       <div class="Celery-FormSection-body">
         <div class="Celery-Form-group">
+          <input class="Celery-TextInput Celery-TextInput--first-name"
+            type="text"
+            placeholder="{{name}}"
+            name="first-name"
+            />
+          <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--first-name">
+          </span>
+        </div>
+      </div>
+
+      <div class="Celery-FormSection-body">
+        <div class="Celery-Form-group">
+          <input class="Celery-TextInput Celery-TextInput--last-name"
+            type="text"
+            placeholder="{{lastName}}"
+            name="last-name"
+            />
+          <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--last-name">
+          </span>
+        </div>
+      </div>
+
+      <div class="Celery-FormSection-body">
+        <div class="Celery-Form-group">
           <input class="Celery-TextInput Celery-TextInput--email"
             type="email"
-            placeholder="Email"
+            placeholder="{{email}}"
             name="email"
             data-celery-validate="email" />
           <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--email">
@@ -110,9 +138,9 @@
             type="text"
             name="cvc"
             pattern="\d*"
-            placeholder="CVC"
+            placeholder="{{card.cvc}}"
             autocomplete="off"
-            data-celery-validate="{{card.cvc}}"
+            data-celery-validate="cvc"
             maxlength="4" />
           <span class="Celery-Icon Celery-Icon--innerInput Celery-Icon--cvc">
           </span>
@@ -148,6 +176,7 @@
 
   <div class="Celery-Form-footer">
     <div class="Celery-OrderSummary">
+    {{#features.quantity}}
       <div class="Celery-OrderSummary-line">
         <span class="Celery-OrderSummary-price Celery-OrderSummary-price--price">
           0
@@ -157,12 +186,14 @@
 
       <span class="Celery-OrderSummary-operator">&times;</span>
 
+
       <div class="Celery-OrderSummary-line">
         <span class="Celery-OrderSummary-number Celery-OrderSummary-number--quantity">
           1
         </span>
         <span class="Celery-OrderSummary-label">{{qty}}</span>
       </div>
+      {{/features.quantity}}
 
       {{#features.coupons}}
         <span class="Celery-OrderSummary-operator coupon" style="display: none;">-</span>
@@ -175,6 +206,7 @@
         </div>
       {{/features.coupons}}
 
+      {{#features.shipping}}
       <span class="Celery-OrderSummary-operator">+</span>
 
       <div class="Celery-OrderSummary-line">
@@ -183,6 +215,7 @@
         </span>
         <span class="Celery-OrderSummary-label">{{ship}}</span>
       </div>
+      {{/features.shipping}}
 
       {{#features.taxes}}
         <span class="Celery-OrderSummary-operator">+</span>
@@ -193,9 +226,9 @@
           </span>
           <span class="Celery-OrderSummary-label">{{taxes}}</span>
         </div>
-      {{/features.taxes}}
 
       <span class="Celery-OrderSummary-operator">=</span>
+      {{/features.taxes}}
 
       <div class="Celery-OrderSummary-line">
         <span class="Celery-OrderSummary-price Celery-OrderSummary-price--total">

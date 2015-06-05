@@ -4,7 +4,7 @@ define(function (require) {
     return {
         formatMoney: function (cents) {
             var options = {
-                precision: 0,
+                precision: 2,
                 symbol: locale.symbol,
                 format: locale.format
             };

@@ -1,24 +1,30 @@
 define(function () {
     {
         return {
+            money: {
+                symbol: '€',
+                format: '%v%s'
+            },
             modal: {
-                preorder: 'Pré-commander pour 50% de réduction!',
-                charged: 'Votre carte sera débitée immédiatement',
-                footer: 'Nous prévoyons de commencer l\'été expédition 2014. \n Nous vous enverrons un e-mail pour recueillir votre adresse plus tard'
+                preorder: 'Afrostream en illimité pendant 1 an pour seulement 13 centimes par jour.',
+                charged: 'Profitez des films et series avant première dès 1er septembre 2015.',
+                footer: 'Abonnez vous maintenant. Vous profitez du service en avant première dès 1er septembre.'
             },
             overlay: {},
             confirmation: {
-                thanks: 'Merci <br /> pour votre soutien !',
-                emailConfirm: 'Votre numéro de pré-commande est #{{number}}. Un email de confirmation à été envoyé votre boîte de réception .',
-                share: 'Partagez avec vos amis !'
+                thanks: 'Merci pour votre soutien !',
+                emailConfirm: 'Un courriel de confirmation vous a été envoyé. Votre numéro de commande est ',
+                share: 'Partager avec vos amis !',
+                shareMsg: {title: 'J’ai précommande mon ', from: 'via '}
             },
             form: {
+                processing: 'Paiement en cours...',
                 quantity: 'Quantité',
                 shipping: 'Livraison',
                 card: {
-                    number: 'Numéro de carte de crédit',
+                    number: '1234 5678 8901 1234',
                     date: 'MM / AA',
-                    cvc: 'cv'
+                    cvc: '123'
                 },
                 contry: {
                     us: {
@@ -30,19 +36,18 @@ define(function () {
                         value: 'zz'
                     }
                 },
-                money: {
-                    symbol: '€',
-                    format: '%v%s'
-                },
-                contact: 'Coordonnées',
-                pay: 'Paiement',
+                contact: 'Information',
+                name: 'Nom',
+                lastName: 'Prénom',
+                email: 'votre-mail@courriel.com',
+                pay: 'Information de paiement',
                 promo: 'Code Promo',
-                promoType: 'Tapez votre code',
+                promoType: 'Entrez votre code',
                 qty: 'Quantité',
                 ship: 'Transport',
                 taxes: 'Tva',
-                preorder: 'Pré-commandez maintenant',
-                secure: 'Cette page est sécurisée avec un cryptage 128-bit',
+                preorder: 'Commandez maintenant',
+                secure: 'Cette page est protégée par un chiffrement avec une clé 128bits',
             }
         }
     }

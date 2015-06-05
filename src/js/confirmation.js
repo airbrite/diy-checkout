@@ -52,14 +52,14 @@ define(function (require) {
             var pieces = [];
 
             if (productName) {
-                pieces.push('Check out ' + productName);
+                pieces.push(locale.confirmation.shareMsg.title + productName);
             }
 
             if (twitterHandle) {
-                pieces.push('from ' + twitterHandle);
+                pieces.push(locale.confirmation.shareMsg.from + twitterHandle);
             }
 
-            pieces.push('on @trycelery');
+            //pieces.push('on @trycelery');
 
             var qs = $.param({
                 url: website,
@@ -73,7 +73,7 @@ define(function (require) {
             var productName = this._getProductName();
             var website = this._getWebsite();
 
-            return 'mailto:?subject=Check out ' + productName + '&body=Check out ' + productName + ': ' + website;
+            return 'mailto:?subject=' + locale.confirmation.shareMsg.title + productName + '&body=' + locale.confirmation.shareMsg.title + productName + ': ' + website;
         },
 
         _appendIcons: function () {

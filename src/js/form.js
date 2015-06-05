@@ -159,7 +159,7 @@ define(function (require) {
             this.buyButtonText = this.$buyButton.text();
             this.$buyButton
                 .addClass('is-disabled')
-                .text('Processing...');
+                .text(locale.form.processing);
         },
 
         submit: function (e) {

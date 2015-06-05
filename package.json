@@ -1,5 +1,5 @@
 {
-  "name": "diy-checkout",
+  "name": "afrostream-diy-checkout",
   "version": "1.0.0",
   "description": "Example self-hosted Celery checkout",
   "main": "Gruntfile.js",
@@ -24,12 +24,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/airbrite/diy-checkout.git"
+    "url": "https://github.com/Afrostream/diy-checkout"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/airbrite/diy-checkout/issues"
+    "url": "https://github.com/Afrostream/diy-checkout/issues"
   },
-  "homepage": "https://github.com/airbrite/diy-checkout"
+  "homepage": "https://github.com/Afrostream/diy-checkout"
 }
