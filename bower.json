@@ -1,8 +1,12 @@
 {
-  "name": "celery-diy-checkout",
+  "name": "afrostream-diy-checkout",
   "version": "1.0.0",
-  "homepage": "https://github.com/airbrite/diy-checkout",
+  "homepage": "https://github.com/Afrostream/diy-checkout",
   "license": "MIT",
+  "main": [
+    "dist/celery.css",
+    "dist/celery-cart.min.js"
+  ],
   "ignore": [
     "**/.*",
     "node_modules",

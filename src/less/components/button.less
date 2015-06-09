@@ -11,7 +11,7 @@
   font-size: @font-size-medium;
   font-weight: @button-font-weight;
   text-transform: uppercase;
-  background-color: @blue;
+  background-color: @yellow;
   border-radius: @button-border-radius;
   text-decoration: none;
 
@@ -20,25 +20,25 @@
   &:hover,
   &:active,
   &:focus {
-    color: @white;
+    color: @purple;
   }
 
   &:hover {
     cursor: pointer;
-    background-color: lighten(@blue, 5%);
+    background-color: lighten(@yellow, 5%);
   }
 
   &:active {
-    background-color: darken(@blue, 15%);
+    background-color: darken(@yellow, 15%);
   }
 
   &:focus {
     outline: 0;
-    background-color: darken(@blue, 3%);
+    background-color: darken(@yellow, 3%);
   }
 
   &.is-disabled {
-    background-color: lighten(@blue, 10%);
+    background-color: lighten(@yellow, 10%);
   }
 }
 
