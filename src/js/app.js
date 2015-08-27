@@ -250,6 +250,7 @@ define(function(require) {
       coupon.validate(code, $.proxy(function(valid) {
         var discount;
 
+        this.updateTaxes();
         this.updateTotal();
 
         // TODO: Move coupon live validation to form
@@ -373,8 +374,15 @@ define(function(require) {
       return shop.data.product && shop.data.product.price;
     },
 
-    _getSubtotal: function() {
+    _getLineItemsTotal: function() {
       return this._getPrice() * this._getQuantity();
+    },
+
+    _getSubtotal: function() {
+      var lineItemsTotal = this._getLineItemsTotal();
+      var discount = this._getDiscount();
+
+      return Math.max(lineItemsTotal - discount, 0);
     },
 
     _getShipping: function() {
@@ -431,13 +439,11 @@ define(function(require) {
     },
 
     _getTotal: function() {
-      var quantity = this._getQuantity();
-      var price = this._getPrice();
+      var subtotal = this._getSubtotal();
       var shipping = this._getShipping();
-      var discount = this._getDiscount();
       var taxes = this._getTaxes();
 
-      return (quantity * price) + shipping + taxes - discount;
+      return subtotal + shipping + taxes;
     }
   };
 });
