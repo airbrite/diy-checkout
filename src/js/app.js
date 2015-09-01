@@ -2,6 +2,7 @@ define(function(require) {
   'use strict';
 
   var $ = require('jquery');
+  var md5 = require('blueimp-md5');
   var celeryClient = require('celery_client');
   var shop = require('shop');
   var coupon = require('coupon');
@@ -172,6 +173,28 @@ define(function(require) {
 
     onConfirmation: function(data) {
       // Runs on confirmation with order data
+      this.initReferralCandy(data);
+    },
+
+    initReferralCandy: function(order) {
+      var ID = 'refcandy-popsicle'; // TODO confirm this is correct
+      var APP_ID = 'YOUR APP ID'; // TODO RC to provide
+      var SECRET = 'YOUR SECRET'; // TODO RC to provide
+      var email = order.buyer.email;
+      var fName = order.buyer.first_name || email;
+      var lName = order.buyer.last_name || '';
+      var amount = order.total / 100;
+      var currency = 'USD';
+      var timestamp = parseInt(new Date().getTime() / 1000, 10);
+      var message = [email, fName, amount, timestamp, SECRET].join(',');
+
+      var signature = md5(message);
+
+      // Insert RC div
+      $('body').append('<div id="' + ID + '" data-app-id="' + APP_ID + '" data-fname="' + fName + '" data-lname="' + lName + '" data-email="' + email + '" data-amount="' + amount + '" data-currency="' + currency + '" data-timestamp="' + timestamp + '" data-signature="' + signature + '"></div>');
+
+      // Request RC script
+      (function(e){var t,n,r,i,s,o,u,a,f,l,c,h,p,d,v;f="script";l="refcandy-purchase-js";c="refcandy-popsicle";p="go.referralcandy.com/purchase/";t="data-app-id";r={email:"a",fname:"b",lname:"c",amount:"d",currency:"e","accepts-marketing":"f",timestamp:"g","referral-code":"h",locale:"i",signature:"ab"};i=e.getElementsByTagName(f)[0];s=function(e,t){if(t){return""+e+"="+encodeURIComponent(t)}else{return""}};d=function(e){return""+p+h.getAttribute(t)+".js?lightbox=1&aa=75&"};if(!e.getElementById(l)){h=e.getElementById(c);if(h){o=e.createElement(f); o.id=l;a=function(){var e;e=[];for(n in r){u=r[n];v=h.getAttribute("data-"+n);e.push(s(u,v))}return e}();o.src=""+e.location.protocol+"//"+d(h.getAttribute(t))+a.join("&");return i.parentNode.insertBefore(o,i)}}})(document);
     },
 
     handleError: function(err) {
