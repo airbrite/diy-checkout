@@ -343,6 +343,7 @@ define(function(require) {
         cvc: this._getFieldValue('cvc'),
         exp_month: expiryParts[0].trim(),
         exp_year: expiryParts[1].trim(),
+        address_zip: this._getFieldValue('billing_zip'),
       }
     },
 
