@@ -156,9 +156,9 @@ define(function(require) {
     },
 
     createOrder: function() {
-      var order = this._generateOrder();
-
-      celeryClient.createOrder(order, this.handleOrder);
+      this._generateOrder(function(order) {
+        celeryClient.createOrder(order, this.handleOrder);
+      }.bind(this));
     },
 
     handleOrder: function(err, res) {
@@ -275,63 +275,91 @@ define(function(require) {
       this.$form.find('.Celery-OrderSummary-price--total').text(total);
     },
 
-    _generateOrder: function() {
-      var $form = this.$form;
-      var order = {
-        buyer: {},
-        shipping_address: {},
-        line_items: [],
-        payment_source: {
-          card: {
-            number: '',
-            exp_month: '',
-            exp_year: '',
-            cvc: ''
+    _generateOrder: function(callback) {
+      this._createStripeToken(this._getCard(), function(err, token) {
+        if (err) {
+          return this.handleError(err);
+        }
+
+        var order = {
+          buyer: {},
+          shipping_address: {},
+          line_items: [],
+          payment_source: {
+            card: {
+              stripe_token: '',
+            }
+          }
+        };
+
+        // Set stripe token
+        if (token) {
+          order.payment_source.card.stripe_token = token.id;
+        }
+
+        order.user_id = shop.data.user_id;
+        order.buyer.email = this._getFieldValue('email');
+
+        // Set shipping
+        order.shipping_address.country = this._getCountry();
+
+        // Set taxes
+        if (config.features.taxes) {
+          order.shipping_address.zip = this._getZip();
+        }
+
+        // Set coupon
+        if (config.features.coupons) {
+          var couponCode = this._getCouponCode();
+
+          if (couponCode) {
+            order.discount_codes = [couponCode];
           }
         }
-      };
 
-      order.user_id = shop.data.user_id;
-      order.buyer.email = this._getFieldValue('email');
+        // Set line item
+        var lineItem = {
+          product_id: shop.data.product._id,
+          quantity: this._getQuantity()
+        };
 
-      // Card
-      var card = order.payment_source.card;
+        order.line_items.push(lineItem);
 
-      card.number = this._getFieldValue('card_number');
-      card.cvc = this._getFieldValue('cvc');
+        return callback(order)
+      }.bind(this));
+    },
+
+    _getCard: function() {
+      if (this._getTotal() === 0) {
+        return null;
+      }
 
       // Card Expiry
       var expiry = this._getFieldValue('expiry');
       var expiryParts = expiry.split('/');
 
-      card.exp_month = expiryParts[0].trim();
-      card.exp_year = expiryParts[1].trim();
+      return {
+        number: this._getFieldValue('card_number'),
+        cvc: this._getFieldValue('cvc'),
+        exp_month: expiryParts[0].trim(),
+        exp_year: expiryParts[1].trim(),
+      }
+    },
 
-      // Shipping
-      order.shipping_address.country = this._getCountry();
+    _createStripeToken: function(card, callback) {
+      var Stripe = window.Stripe || {};
 
-      if (config.features.taxes) {
-        order.shipping_address.zip = this._getZip();
+      if (!card) {
+        return callback(null, null);
       }
 
-      // Coupon
-      if (config.features.coupons) {
-        var couponCode = this._getCouponCode();
-
-        if (couponCode) {
-          order.discount_codes = [couponCode];
+      Stripe.card.createToken(card, function(status, response) {
+        if (response.error) {
+          return callback(response.error);
         }
-      }
 
-      // Line Item
-      var lineItem = {
-        product_id: shop.data.product._id,
-        quantity: this._getQuantity()
-      };
-
-      order.line_items.push(lineItem);
-
-      return order;
+        return callback(null, response);
+      });
     },
 
     _getDiscount: function() {
